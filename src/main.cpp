@@ -2,6 +2,10 @@
 
 
 
+#include <vector>
+
+
+
 
 
 
@@ -47,18 +51,34 @@ auto main() -> int
 
 
 
-	auto window_dc = GetDC(window);
+	// SET UP RENDERING
+	auto                  window_dc       = GetDC(window);
+	std::vector<COLORREF> framebuffer       (800 * 800, RGB(0, 0, 255)); // DIBs use BGR
+	auto                  framebuffer_dc  = CreateCompatibleDC(window_dc);
+	auto                  framebuffer_bmp = CreateBitmap(800,
+	                                                     800,
+	                                                     1,
+	                                                     sizeof(DWORD) * 8,
+	                                                     reinterpret_cast<void *>(framebuffer.data()));
+	SelectObject(framebuffer_dc, framebuffer_bmp);
 
 
 
 	ShowWindow(window, SW_SHOW);
 
-
-
 	MSG message;
 	while (window_is_valid)
 	{
-		SetPixel(window_dc, 400, 400, RGB(255, 0, 0));
+		// RENDER TO window USING BitBlt
+		BitBlt(window_dc,
+		       0,
+		       0,
+		       800,
+		       800,
+		       framebuffer_dc,
+		       0,
+		       0,
+		       SRCCOPY);
 
 
 
