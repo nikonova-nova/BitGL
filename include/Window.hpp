@@ -40,7 +40,7 @@ public:
 
 
 private:
-	static auto create_window_class()                                                                           -> ATOM;
+	static auto create_window_class(std::string const &name)                                                    -> ATOM;
 	static auto create_window(int const width, int const height, std::string const &title, bool const *is_open) -> HWND;
 
 

@@ -9,7 +9,7 @@ Window::Window(int const width, int const height, std::string const &title) noex
 {
 	// Check if window class was already registered
 	// If it wasn't, create and register one
-	if (m_window_class_id == 0) { m_window_class_id = create_window_class(); }
+	if (m_window_class_id == 0) { m_window_class_id = create_window_class("nikonova-nova | BitGL default window class"); }
 
 	m_window = create_window(width, height, title, &m_is_open);
 	m_dc     = GetDC(m_window);
@@ -68,7 +68,7 @@ auto Window::get_hdc()  -> HDC
 
 
 
-auto Window::create_window_class() -> ATOM
+auto Window::create_window_class(std::string const &name) -> ATOM
 {
 	WNDCLASSA window_class
 	{
@@ -76,7 +76,7 @@ auto Window::create_window_class() -> ATOM
 		.lpfnWndProc   = reinterpret_cast<WNDPROC>(&m_window_callback),
 		.hInstance     = GetModuleHandleA(nullptr),
 		.hbrBackground = CreateSolidBrush(RGB(255, 255, 255)),
-		.lpszClassName = "nikonova-nova | BitGL default window class"
+		.lpszClassName = name.c_str()
 	};
 
 	return RegisterClassA(&window_class);
