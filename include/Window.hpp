@@ -25,6 +25,8 @@ public:
 
 
 public:
+	auto is_open() -> bool;
+
 	auto restore()  -> void;
 	auto minimize() -> void;
 

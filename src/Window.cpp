@@ -25,6 +25,11 @@ Window::~Window() noexcept
 
 
 
+auto Window::is_open() -> bool
+{
+	return m_is_open;
+}
+
 auto Window::restore()  -> void
 {
 	ShowWindow(m_window, SW_SHOW);
