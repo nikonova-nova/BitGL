@@ -83,5 +83,18 @@ auto main() -> int
 
 auto CALLBACK window_callback(HWND window, UINT message, WPARAM w_param, LPARAM l_param) noexcept -> LRESULT
 {
-	return DefWindowProcA(window, message, w_param, l_param);
+	switch (message)
+	{
+	case WM_CLOSE:
+		{
+			auto window_is_valid = reinterpret_cast<bool *>(GetWindowLongPtrA(window, GWLP_USERDATA));
+			*window_is_valid = false;
+			return 0;
+		}
+
+	default:
+		{
+			return DefWindowProcA(window, message, w_param, l_param);
+		}
+	}
 }
