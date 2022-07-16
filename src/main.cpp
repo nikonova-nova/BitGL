@@ -22,41 +22,12 @@ auto CALLBACK window_callback(HWND window, UINT message, WPARAM w_param, LPARAM 
 
 auto main() -> int
 {
-	auto instance = GetModuleHandleA(nullptr);
-
-
-
-	WNDCLASSA window_class
-	{
-		.style         = CS_HREDRAW | CS_OWNDC | CS_VREDRAW,
-		.lpfnWndProc   = reinterpret_cast<WNDPROC>(&window_callback),
-		.hInstance     = instance,
-		.hbrBackground = CreateSolidBrush(RGB(255, 255, 255)),
-		.lpszClassName = "nikonova-nova | BitGL default window class"
-	};
-
-	auto window_class_id = RegisterClassA(&window_class);
-
-
-
-	auto window = CreateWindowA(MAKEINTATOM(window_class_id),
-	                            "BitGL",
-	                            WS_CAPTION | WS_OVERLAPPED | WS_SYSMENU,
-	                            CW_USEDEFAULT, CW_USEDEFAULT,
-	                            800, 800,
-	                            nullptr,
-	                            nullptr,
-	                            instance,
-	                            nullptr);
-
-	auto window_is_valid = true;
-
-	SetWindowLongPtrA(window, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(&window_is_valid));
+	Window window(800, 800, "BitGL");
 
 
 
 	// SET UP RENDERING
-	auto                  window_dc       = GetDC(window);
+	auto                  window_dc       = window.get_hdc();
 	std::vector<COLORREF> framebuffer       (800 * 800, RGB(0, 0, 255)); // DIBs use BGR
 	auto                  framebuffer_dc  = CreateCompatibleDC(window_dc);
 	auto                  framebuffer_bmp = CreateBitmap(800,
@@ -68,10 +39,10 @@ auto main() -> int
 
 
 
-	ShowWindow(window, SW_SHOW);
+	window.restore();
 
 	MSG message;
-	while (window_is_valid)
+	while (window.is_open())
 	{
 		// RENDER TO window USING BitBlt
 		BitBlt(window_dc,
@@ -99,9 +70,6 @@ auto main() -> int
 
 	DeleteObject(framebuffer_bmp);
 	DeleteDC(framebuffer_dc);
-	ReleaseDC(window, window_dc);
-	DestroyWindow(window);
-	UnregisterClassA(MAKEINTATOM(window_class_id), instance);
 
 
 
