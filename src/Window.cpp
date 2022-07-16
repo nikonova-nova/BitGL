@@ -109,10 +109,13 @@ auto CALLBACK Window::m_window_callback(HWND window, UINT message, WPARAM w_para
 	{
 	case WM_CLOSE:
 		{
+			ShowWindow(window, SW_HIDE);
+
 			// Get m_is_open associated with closed HWND's parent Window and set it to false
 			// Necessary so that user defined main loops will know when to stop
 			auto m_is_open = reinterpret_cast<bool *>(GetWindowLongPtrA(window, GWLP_USERDATA));
 			*m_is_open = false;
+
 			return 0;
 		}
 
