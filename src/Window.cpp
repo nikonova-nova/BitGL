@@ -25,21 +25,21 @@ Window::~Window() noexcept
 
 
 
-auto Window::is_open() -> bool
+auto Window::is_open() const noexcept -> bool
 {
 	return m_is_open;
 }
 
-auto Window::restore()  -> void
+auto Window::restore()  noexcept -> void
 {
 	ShowWindow(m_window, SW_SHOW);
 }
-auto Window::minimize() -> void
+auto Window::minimize() noexcept -> void
 {
 	ShowWindow(m_window, SW_SHOWMINIMIZED);
 }
 
-auto Window::poll_events() -> void
+auto Window::poll_events() noexcept -> void
 {
 	MSG message;
 	while (PeekMessageA(&message, nullptr, 0, 0, PM_REMOVE))
@@ -48,7 +48,7 @@ auto Window::poll_events() -> void
 		DispatchMessageA(&message);
 	}
 }
-auto Window::wait_events() -> void
+auto Window::wait_events() noexcept -> void
 {
 	WaitMessage();
 
@@ -57,18 +57,18 @@ auto Window::wait_events() -> void
 
 
 
-auto Window::get_hwnd() -> HWND
+auto Window::get_hwnd() const noexcept -> HWND
 {
 	return m_window;
 }
-auto Window::get_hdc()  -> HDC
+auto Window::get_hdc()  const noexcept -> HDC
 {
 	return m_dc;
 }
 
 
 
-auto Window::create_window_class(std::string const &name) -> ATOM
+auto Window::create_window_class(std::string const &name) noexcept -> ATOM
 {
 	WNDCLASSA window_class
 	{
@@ -81,7 +81,7 @@ auto Window::create_window_class(std::string const &name) -> ATOM
 
 	return RegisterClassA(&window_class);
 }
-auto Window::create_window(int const width, int const height, std::string const &title, bool const *is_open) -> HWND
+auto Window::create_window(int const width, int const height, std::string const &title, bool const *is_open) noexcept -> HWND
 {
 	auto window = CreateWindowA(MAKEINTATOM(m_window_class_id),
 	                            title.c_str(),
@@ -103,7 +103,7 @@ auto Window::create_window(int const width, int const height, std::string const 
 
 
 
-auto CALLBACK Window::m_window_callback(HWND window, UINT message, WPARAM w_param, LPARAM l_param) -> LRESULT
+auto CALLBACK Window::m_window_callback(HWND window, UINT message, WPARAM w_param, LPARAM l_param) noexcept -> LRESULT
 {
 	switch (message)
 	{

@@ -25,27 +25,27 @@ public:
 
 
 public:
-	auto is_open() const -> bool;
+	auto is_open() const noexcept -> bool;
 
-	auto restore()  -> void;
-	auto minimize() -> void;
+	auto restore()  noexcept -> void;
+	auto minimize() noexcept -> void;
 
-	auto poll_events() -> void;
-	auto wait_events() -> void;
+	auto poll_events() noexcept -> void;
+	auto wait_events() noexcept -> void;
 
 
 public:
-	auto get_hwnd() const -> HWND;
-	auto get_hdc()  const -> HDC;
+	auto get_hwnd() const noexcept -> HWND;
+	auto get_hdc()  const noexcept -> HDC;
 
 
 private:
-	static auto create_window_class(std::string const &name)                                                    -> ATOM;
-	static auto create_window(int const width, int const height, std::string const &title, bool const *is_open) -> HWND;
+	static auto create_window_class(std::string const &name)                                                    noexcept -> ATOM;
+	static auto create_window(int const width, int const height, std::string const &title, bool const *is_open) noexcept -> HWND;
 
 
 private:
-	static auto CALLBACK m_window_callback(HWND window, UINT message, WPARAM w_param, LPARAM l_param) -> LRESULT;
+	static auto CALLBACK m_window_callback(HWND window, UINT message, WPARAM w_param, LPARAM l_param) noexcept -> LRESULT;
 	inline static ATOM m_window_class_id = 0;
 
 	HWND m_window;
