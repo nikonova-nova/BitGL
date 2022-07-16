@@ -1,0 +1,13 @@
+#ifndef NIKONOVA_NOVA_BITGL_SRC_WINDOW_HPP
+#define NIKONOVA_NOVA_BITGL_SRC_WINDOW_HPP
+
+
+
+class Window
+{
+
+}
+
+
+
+#endif
