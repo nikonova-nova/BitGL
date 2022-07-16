@@ -25,7 +25,7 @@ public:
 
 
 public:
-	auto is_open() -> bool;
+	auto is_open() const -> bool;
 
 	auto restore()  -> void;
 	auto minimize() -> void;
@@ -35,8 +35,8 @@ public:
 
 
 public:
-	auto get_hwnd() -> HWND;
-	auto get_hdc()  -> HDC;
+	auto get_hwnd() const -> HWND;
+	auto get_hdc()  const -> HDC;
 
 
 private:
