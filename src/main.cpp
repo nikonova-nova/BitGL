@@ -93,6 +93,14 @@ auto main() -> int
 
 
 
+	DeleteObject(framebuffer_bmp);
+	DeleteDC(framebuffer_dc);
+	ReleaseDC(window, window_dc);
+	DestroyWindow(window);
+	UnregisterClassA(MAKEINTATOM(window_class_id), instance);
+
+
+
 	return EXIT_SUCCESS;
 }
 
