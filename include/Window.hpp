@@ -38,8 +38,8 @@ public:
 
 
 private:
-	static auto create_window_class()                                                      -> ATOM;
-	static auto create_window(int const width, int const height, std::string const &title) -> HWND;
+	static auto create_window_class()                                                                           -> ATOM;
+	static auto create_window(int const width, int const height, std::string const &title, bool const *is_open) -> HWND;
 
 
 private:
@@ -48,6 +48,8 @@ private:
 
 	HWND m_window;
 	HDC  m_dc;
+
+	bool m_is_open;
 };
 
 
