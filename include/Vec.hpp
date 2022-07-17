@@ -1,0 +1,16 @@
+#ifndef NIKONOVA_NOVA_BITGL_SRC_VEC_HPP
+#define NIKONOVA_NOVA_BITGL_SRC_VEC_HPP
+
+
+
+
+
+
+
+
+
+
+
+
+
+#endif
