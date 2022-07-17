@@ -26,7 +26,7 @@ public:
 
 
 public:
-	auto clear_colorbuffer(Vec3<int> const &color)                      -> void;
+	auto clear_colorbuffer(Vec3<int> const &color)                       -> void;
 	auto render_point(Vec2<int> const &position, Vec3<int> const &color) -> void;
 
 	auto draw() -> void;
