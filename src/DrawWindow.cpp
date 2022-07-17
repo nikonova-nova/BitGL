@@ -27,7 +27,7 @@ DrawWindow::~DrawWindow()
 
 auto DrawWindow::clear_colorbuffer(Vec3<int> const &color) -> void
 {
-	std::fill(m_colorbuffer.begin(), m_colorbuffer.end(), RGB(color[Vec::b], color[Vec::g], color[Vec::r]));
+	std::fill(m_colorbuffer.begin(), m_colorbuffer.end(), to_colorref(color));
 }
 auto DrawWindow::render_point(Vec2<int> const &position, Vec3<int> const &color) -> void
 {
@@ -35,7 +35,7 @@ auto DrawWindow::render_point(Vec2<int> const &position, Vec3<int> const &color)
 	GetWindowRect(get_hwnd(), &window_rect);
 	auto width = window_rect.right - window_rect.left;
 
-	m_colorbuffer[position[Vec::y] * width + position[Vec::x]] = RGB(color[Vec::b], color[Vec::g], color[Vec::r]);
+	m_colorbuffer[position[Vec::y] * width + position[Vec::x]] = to_colorref(color);
 }
 
 auto DrawWindow::draw() -> void
