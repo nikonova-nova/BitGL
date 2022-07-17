@@ -27,11 +27,11 @@ DrawWindow::~DrawWindow()
 
 
 
-auto DrawWindow::clear_colorbuffer(Vec3<int> const &color) -> void
+auto DrawWindow::clear_colorbuffer(Vec3<std::uint8_t> const &color) -> void
 {
 	std::fill(m_colorbuffer.begin(), m_colorbuffer.end(), to_colorref(color));
 }
-auto DrawWindow::render_point(Vec2<int> const &position, Vec3<int> const &color) -> void
+auto DrawWindow::render_point(Vec2<int> const &position, Vec3<std::uint8_t> const &color) -> void
 {
 	RECT window_rect;
 	GetWindowRect(get_hwnd(), &window_rect);

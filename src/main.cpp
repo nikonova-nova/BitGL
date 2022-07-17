@@ -34,9 +34,9 @@ auto main() -> int
 
 
 
-		int r = (std::cos(time_now + 0      ) + 1) * 127;
-		int g = (std::cos(time_now + 2.0944 ) + 1) * 127;
-		int b = (std::cos(time_now + 4.18879) + 1) * 127;
+		std::uint8_t r = (std::cos(time_now + 0      ) + 1) * 127;
+		std::uint8_t g = (std::cos(time_now + 2.0944 ) + 1) * 127;
+		std::uint8_t b = (std::cos(time_now + 4.18879) + 1) * 127;
 
 		// Win32 uses BGR for this
 		window.clear_colorbuffer({ r, g, b });
