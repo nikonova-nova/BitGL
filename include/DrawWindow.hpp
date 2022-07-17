@@ -26,7 +26,7 @@ public:
 
 
 public:
-	auto clear_framebuffer(COLORREF const color)                      -> void;
+	auto clear_colorbuffer(COLORREF const color)                      -> void;
 	auto render_point(int const x, int const y, COLORREF const color) -> void;
 
 	auto draw() -> void;

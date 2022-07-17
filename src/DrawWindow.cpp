@@ -25,7 +25,7 @@ DrawWindow::~DrawWindow()
 
 
 
-auto DrawWindow::clear_framebuffer(COLORREF const color) -> void
+auto DrawWindow::clear_colorbuffer(COLORREF const color) -> void
 {
 	std::fill(m_colorbuffer.begin(), m_colorbuffer.end(), color);
 }
