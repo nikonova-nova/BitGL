@@ -33,11 +33,7 @@ auto DrawWindow::clear_colorbuffer(Vec3<std::uint8_t> const &color) -> void
 }
 auto DrawWindow::render_point(Vec2<int> const &position, Vec3<std::uint8_t> const &color) -> void
 {
-	RECT window_rect;
-	GetWindowRect(get_hwnd(), &window_rect);
-	auto width = window_rect.right - window_rect.left;
-
-	m_colorbuffer[to_1d_index(position, static_cast<int>(width))] = to_colorref(color);
+	m_colorbuffer[to_1d_index(position, get_size()[Vec::width])] = to_colorref(color);
 }
 
 auto DrawWindow::draw() -> void
@@ -45,16 +41,13 @@ auto DrawWindow::draw() -> void
 	SetBitmapBits(m_colorbuffer_bitmap, m_colorbuffer.size() * sizeof(decltype(m_colorbuffer)::value_type), m_colorbuffer.data());
 	SelectObject(m_colorbuffer_dc, m_colorbuffer_bitmap);
 
-	RECT window_rect;
-	GetWindowRect(get_hwnd(), &window_rect);
-	auto width  = window_rect.right  - window_rect.left;
-	auto height = window_rect.bottom - window_rect.top;
+	auto window_size = get_size();
 
 	BitBlt(get_hdc(),
 	       0,
 	       0,
-	       width,
-	       height,
+	       window_size[Vec::width],
+	       window_size[Vec::height],
 	       m_colorbuffer_dc,
 	       0,
 	       0,
