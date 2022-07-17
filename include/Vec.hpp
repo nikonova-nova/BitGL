@@ -66,4 +66,11 @@ constexpr auto to_colorref(Vec3<int> const &color) -> COLORREF;
 
 
 
+#include "Vec.ipp"
+
+
+
+
+
+
 #endif
