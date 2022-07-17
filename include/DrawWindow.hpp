@@ -42,6 +42,10 @@ public:
 	using Window::wait_events;
 
 
+public:
+	using Window::get_hwnd;
+
+
 private:
 	std::vector<COLORREF> framebuffer;
 	HDC                   framebuffer_dc;
