@@ -6,6 +6,10 @@
 
 
 
+#include <Windows.h>
+
+
+
 #include <cstddef>
 
 
@@ -48,6 +52,14 @@ using Vec3 = std::array<T, 3>;
 
 template<typename T>
 using Vec4 = std::array<T, 4>;
+
+
+
+
+
+
+// helpers
+constexpr auto to_colorref(Vec3<int> const &color) -> COLORREF;
 
 
 
