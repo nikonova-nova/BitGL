@@ -39,6 +39,8 @@ public:
 
 
 public:
+	auto get_size() const noexcept -> Vec2<int>;
+
 	auto get_hwnd() const noexcept -> HWND;
 	auto get_hdc()  const noexcept -> HDC;
 
@@ -51,6 +53,8 @@ private:
 private:
 	static auto CALLBACK m_window_callback(HWND window, UINT message, WPARAM w_param, LPARAM l_param) noexcept -> LRESULT;
 	inline static ATOM m_window_class_id = 0;
+
+	Vec2<int> m_size;
 
 	HWND m_window;
 	HDC  m_dc;

@@ -5,7 +5,8 @@
 
 
 
-Window::Window(Vec2<int> const &size, std::string const &title) noexcept
+Window::Window(Vec2<int> const &size, std::string const &title) noexcept :
+	m_size { size }
 {
 	// Check if window class was already registered
 	// If it wasn't, create and register one
@@ -56,6 +57,11 @@ auto Window::wait_events() noexcept -> void
 }
 
 
+
+auto Window::get_size() const noexcept -> Vec2<int>
+{
+	return m_size;
+}
 
 auto Window::get_hwnd() const noexcept -> HWND
 {
