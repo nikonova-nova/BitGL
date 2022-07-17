@@ -11,6 +11,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 set(project_name     "BitGL")
 set(project_source_files
     "Window.cpp"
+    "DrawWindow.cpp"
     "main.cpp")
 
 

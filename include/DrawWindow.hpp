@@ -1,0 +1,16 @@
+#ifndef NIKONOVA_NOVA_BITGL_SRC_DRAWWINDOW_HPP
+#define NIKONOVA_NOVA_BITGL_SRC_DRAWWINDOW_HPP
+
+
+
+
+
+
+
+
+
+
+
+
+
+#endif
