@@ -18,7 +18,7 @@
 
 
 
-class DrawWindow : private Window
+class DrawWindow : public Window
 {
 public:
 	DrawWindow(int const width, int const height, std::string const &title);
@@ -30,20 +30,6 @@ public:
 	auto render_point(int const x, int const y, COLORREF const color) -> void;
 
 	auto draw() -> void;
-
-
-public:
-	using Window::is_open;
-
-	using Window::restore;
-	using Window::minimize;
-
-	using Window::poll_events;
-	using Window::wait_events;
-
-
-public:
-	using Window::get_hwnd;
 
 
 private:
