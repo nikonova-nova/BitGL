@@ -33,9 +33,9 @@ public:
 
 
 private:
-	std::vector<COLORREF> m_framebuffer;
-	HDC                   m_framebuffer_dc;
-	HBITMAP               m_framebuffer_bitmap;
+	std::vector<COLORREF> m_colorbuffer;
+	HDC                   m_colorbuffer_dc;
+	HBITMAP               m_colorbuffer_bitmap;
 
 	HBITMAP m_old_bitmap; // necessary to properly destruct framebuffer_dc
 };
