@@ -5,13 +5,13 @@
 
 
 
-Window::Window(int const width, int const height, std::string const &title) noexcept
+Window::Window(Vec2<int> const &size, std::string const &title) noexcept
 {
 	// Check if window class was already registered
 	// If it wasn't, create and register one
 	if (m_window_class_id == 0) { m_window_class_id = create_window_class("nikonova-nova | BitGL default window class"); }
 
-	m_window = create_window(width, height, title, &m_is_open);
+	m_window = create_window(size, title, &m_is_open);
 	m_dc     = GetDC(m_window);
 
 	m_is_open = true;
@@ -81,15 +81,15 @@ auto Window::create_window_class(std::string const &name) noexcept -> ATOM
 
 	return RegisterClassA(&window_class);
 }
-auto Window::create_window(int const width, int const height, std::string const &title, bool const *is_open) noexcept -> HWND
+auto Window::create_window(Vec2<int> const &size, std::string const &title, bool const *is_open) noexcept -> HWND
 {
 	auto window = CreateWindowA(MAKEINTATOM(m_window_class_id),
 	                            title.c_str(),
 	                            WS_CAPTION | WS_OVERLAPPED | WS_SYSMENU,
 	                            CW_USEDEFAULT,
 	                            CW_USEDEFAULT,
-	                            width,
-	                            height,
+	                            size[Vec::width],
+	                            size[Vec::height],
 	                            nullptr,
 	                            nullptr,
 	                            GetModuleHandleA(nullptr),

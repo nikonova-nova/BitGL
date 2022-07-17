@@ -21,13 +21,13 @@
 class DrawWindow : public Window
 {
 public:
-	DrawWindow(int const width, int const height, std::string const &title);
+	DrawWindow(Vec2<int> const &size, std::string const &title);
 	~DrawWindow();
 
 
 public:
-	auto clear_colorbuffer(COLORREF const color)                      -> void;
-	auto render_point(int const x, int const y, COLORREF const color) -> void;
+	auto clear_colorbuffer(Vec3<int> const &color)                      -> void;
+	auto render_point(Vec2<int> const &position, Vec3<int> const &color) -> void;
 
 	auto draw() -> void;
 

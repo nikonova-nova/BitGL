@@ -9,11 +9,11 @@
 
 
 
-DrawWindow::DrawWindow(int const width, int const height, std::string const &title) :
-	Window               (width, height, title),
-	m_colorbuffer        (width * height, RGB(0, 0, 0)),
+DrawWindow::DrawWindow(Vec2<int> const &size, std::string const &title) :
+	Window               (size, title),
+	m_colorbuffer        (size[Vec::width] * size[Vec::height], RGB(0, 0, 0)),
 	m_colorbuffer_dc     { CreateCompatibleDC(get_hdc()) },
-	m_colorbuffer_bitmap { CreateBitmap(width, height, 1, sizeof(decltype(m_colorbuffer)::value_type) * 8, m_colorbuffer.data()) },
+	m_colorbuffer_bitmap { CreateBitmap(size[Vec::width], size[Vec::height], 1, sizeof(decltype(m_colorbuffer)::value_type) * 8, m_colorbuffer.data()) },
 	m_old_bitmap         { static_cast<decltype(m_old_bitmap)>(SelectObject(m_colorbuffer_dc, m_colorbuffer_bitmap)) }
 {}
 DrawWindow::~DrawWindow()
@@ -25,17 +25,17 @@ DrawWindow::~DrawWindow()
 
 
 
-auto DrawWindow::clear_colorbuffer(COLORREF const color) -> void
+auto DrawWindow::clear_colorbuffer(Vec3<int> const &color) -> void
 {
-	std::fill(m_colorbuffer.begin(), m_colorbuffer.end(), color);
+	std::fill(m_colorbuffer.begin(), m_colorbuffer.end(), RGB(color[Vec::b], color[Vec::g], color[Vec::r]));
 }
-auto DrawWindow::render_point(int const x, int const y, COLORREF const color) -> void
+auto DrawWindow::render_point(Vec2<int> const &position, Vec3<int> const &color) -> void
 {
 	RECT window_rect;
 	GetWindowRect(get_hwnd(), &window_rect);
 	auto width = window_rect.right - window_rect.left;
 
-	m_colorbuffer[y * width + x] = color;
+	m_colorbuffer[position[Vec::y] * width + position[Vec::x]] = RGB(color[Vec::b], color[Vec::g], color[Vec::r]);
 }
 
 auto DrawWindow::draw() -> void

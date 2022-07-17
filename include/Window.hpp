@@ -14,13 +14,17 @@
 
 
 
+#include "Vec.hpp"
+
+
+
 
 
 
 class Window
 {
 public:
-	Window(int const width, int const height, std::string const &title) noexcept;
+	Window(Vec2<int> const &size, std::string const &title) noexcept;
 	~Window() noexcept;
 
 
@@ -41,7 +45,7 @@ public:
 
 private:
 	static auto create_window_class(std::string const &name)                                                    noexcept -> ATOM;
-	static auto create_window(int const width, int const height, std::string const &title, bool const *is_open) noexcept -> HWND;
+	static auto create_window(Vec2<int> const &size, std::string const &title, bool const *is_open) noexcept -> HWND;
 
 
 private:

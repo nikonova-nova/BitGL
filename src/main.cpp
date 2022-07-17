@@ -16,7 +16,7 @@
 
 auto main() -> int
 {
-	DrawWindow window(800, 800, "BitGL");
+	DrawWindow window({ 800, 800 }, "BitGL");
 	window.restore();
 
 
@@ -39,7 +39,7 @@ auto main() -> int
 		int b = (std::cos(time_now + 4.18879) + 1) * 127;
 
 		// Win32 uses BGR for this
-		window.clear_colorbuffer(RGB(b, g, r));
+		window.clear_colorbuffer({ r, g, b });
 		window.draw();
 
 		window.poll_events();
