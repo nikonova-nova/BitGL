@@ -3,6 +3,7 @@
 
 
 #include "color_utils.hpp"
+#include "point_utils.hpp"
 #include "DrawWindow.hpp"
 
 
@@ -36,7 +37,7 @@ auto DrawWindow::render_point(Vec2<int> const &position, Vec3<int> const &color)
 	GetWindowRect(get_hwnd(), &window_rect);
 	auto width = window_rect.right - window_rect.left;
 
-	m_colorbuffer[position[Vec::y] * width + position[Vec::x]] = to_colorref(color);
+	m_colorbuffer[to_1d_index(position, static_cast<int>(width))] = to_colorref(color);
 }
 
 auto DrawWindow::draw() -> void
