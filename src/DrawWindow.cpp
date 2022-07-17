@@ -10,24 +10,24 @@
 
 
 DrawWindow::DrawWindow(int const width, int const height, std::string const &title) :
-	Window             (width, height, title),
-	framebuffer        (width * height, RGB(0, 0, 0)),
-	framebuffer_dc     { CreateCompatibleDC(get_hdc()) },
-	framebuffer_bitmap { CreateBitmap(width, height, 1, sizeof(decltype(framebuffer)::value_type) * 8, framebuffer.data()) },
-	old_bitmap         { static_cast<decltype(old_bitmap)>(SelectObject(framebuffer_dc, framebuffer_bitmap)) }
+	Window               (width, height, title),
+	m_colorbuffer        (width * height, RGB(0, 0, 0)),
+	m_colorbuffer_dc     { CreateCompatibleDC(get_hdc()) },
+	m_colorbuffer_bitmap { CreateBitmap(width, height, 1, sizeof(decltype(m_colorbuffer)::value_type) * 8, m_colorbuffer.data()) },
+	m_old_bitmap         { static_cast<decltype(m_old_bitmap)>(SelectObject(m_colorbuffer_dc, m_colorbuffer_bitmap)) }
 {}
 DrawWindow::~DrawWindow()
 {
-	SelectObject(framebuffer_dc, old_bitmap);
-	DeleteObject(framebuffer_bitmap);
-	DeleteDC(framebuffer_dc);
+	SelectObject(m_colorbuffer_dc, m_old_bitmap);
+	DeleteObject(m_colorbuffer_bitmap);
+	DeleteDC(m_colorbuffer_dc);
 }
 
 
 
 auto DrawWindow::clear_framebuffer(COLORREF const color) -> void
 {
-	std::fill(framebuffer.begin(), framebuffer.end(), color);
+	std::fill(m_colorbuffer.begin(), m_colorbuffer.end(), color);
 }
 auto DrawWindow::render_point(int const x, int const y, COLORREF const color) -> void
 {
@@ -35,13 +35,13 @@ auto DrawWindow::render_point(int const x, int const y, COLORREF const color) ->
 	GetWindowRect(get_hwnd(), &window_rect);
 	auto width = window_rect.right - window_rect.left;
 
-	framebuffer[y * width + x] = color;
+	m_colorbuffer[y * width + x] = color;
 }
 
 auto DrawWindow::draw() -> void
 {
-	SetBitmapBits(framebuffer_bitmap, framebuffer.size() * sizeof(decltype(framebuffer)::value_type), framebuffer.data());
-	SelectObject(framebuffer_dc, framebuffer_bitmap);
+	SetBitmapBits(m_colorbuffer_bitmap, m_colorbuffer.size() * sizeof(decltype(m_colorbuffer)::value_type), m_colorbuffer.data());
+	SelectObject(m_colorbuffer_dc, m_colorbuffer_bitmap);
 
 	RECT window_rect;
 	GetWindowRect(get_hwnd(), &window_rect);
@@ -53,7 +53,7 @@ auto DrawWindow::draw() -> void
 	       0,
 	       width,
 	       height,
-	       framebuffer_dc,
+	       m_colorbuffer_dc,
 	       0,
 	       0,
 	       SRCCOPY);
