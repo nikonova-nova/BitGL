@@ -14,7 +14,7 @@ namespace BitGL
 		// If it wasn't, create and register one
 		if (m_window_class_id == 0) { m_window_class_id = create_window_class("nikonova-nova | BitGL default window class"); }
 
-		m_window = create_window(size, title, &m_is_open);
+		m_window = create_window(client_to_window(size), title, &m_is_open);
 		m_dc     = GetDC(m_window);
 
 		m_is_open = true;
@@ -99,27 +99,30 @@ namespace BitGL
 
 		return RegisterClassA(&window_class);
 	}
-	auto Window::create_window(Vec2<int> const &size, std::string const &title, bool const *is_open) noexcept -> HWND
-	{
-		DWORD window_style = WS_CAPTION | WS_OVERLAPPED | WS_SYSMENU;
 
+	auto Window::client_to_window(Vec2<int> const &client_size)                                      noexcept -> Vec2<int>
+	{
 		RECT window_rect
 		{
 			.left   = 0,
 			.top    = 0,
-			.right  = size[Vec::width],
-			.bottom = size[Vec::height]
+			.right  = client_size[Vec::width],
+			.bottom = client_size[Vec::height]
 		};
 
-		AdjustWindowRect(&window_rect, window_style, FALSE);
+		AdjustWindowRect(&window_rect, WS_CAPTION | WS_OVERLAPPED | WS_SYSMENU, FALSE);
 
+		return { window_rect.right - window_rect.left, window_rect.bottom - window_rect.top };
+	}
+	auto Window::create_window(Vec2<int> const &size, std::string const &title, bool const *is_open) noexcept -> HWND
+	{
 		auto window = CreateWindowA(MAKEINTATOM(m_window_class_id),
 		                            title.c_str(),
-		                            window_style,
+		                            WS_CAPTION | WS_OVERLAPPED | WS_SYSMENU,
 		                            CW_USEDEFAULT,
 		                            CW_USEDEFAULT,
-		                            window_rect.right - window_rect.left,
-		                            window_rect.bottom - window_rect.top,
+		                            size[Vec::width],
+		                            size[Vec::height],
 		                            nullptr,
 		                            nullptr,
 		                            GetModuleHandleA(nullptr),

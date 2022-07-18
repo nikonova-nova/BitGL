@@ -54,6 +54,8 @@ namespace BitGL
 
 	private:
 		static auto create_window_class(std::string const &name)                                        noexcept -> ATOM;
+
+		static auto client_to_window(Vec2<int> const &client_size)                                      noexcept -> Vec2<int>;
 		static auto create_window(Vec2<int> const &size, std::string const &title, bool const *is_open) noexcept -> HWND;
 
 
