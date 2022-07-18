@@ -2,8 +2,8 @@
 
 
 
-#include "color_utils.hpp"
-#include "point_utils.hpp"
+#include "Color.hpp"
+#include "Point.hpp"
 #include "DrawWindow.hpp"
 
 
