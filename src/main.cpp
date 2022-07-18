@@ -3,6 +3,7 @@
 
 
 #include <chrono>
+#include <iostream>
 
 
 
@@ -21,18 +22,9 @@ auto main() -> int
 
 
 
-	float time_now = 0;
-	auto previous_time = std::chrono::high_resolution_clock::now();
-
-
-
 	while (window.is_open())
 	{
-		auto current_time = std::chrono::high_resolution_clock::now();
-		time_now += std::chrono::duration_cast<std::chrono::milliseconds>(current_time - previous_time).count() / 1000.0f;
-		previous_time = current_time;
-
-
+		auto time_now = BitGL::Window::get_time();
 
 		std::uint8_t r = (std::cos(time_now + 0      ) + 1) * 127;
 		std::uint8_t g = (std::cos(time_now + 2.0944 ) + 1) * 127;
@@ -44,6 +36,8 @@ auto main() -> int
 
 		BitGL::Window::poll_events();
 	}
+
+
 
 	return EXIT_SUCCESS;
 }
