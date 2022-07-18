@@ -100,7 +100,7 @@ namespace BitGL
 		return RegisterClassA(&window_class);
 	}
 
-	auto Window::client_to_window(Vec2<int> const &client_size)                                      noexcept -> Vec2<int>
+	auto Window::client_to_window(Vec2<int> const &client_size) noexcept -> Vec2<int>
 	{
 		RECT window_rect
 		{
