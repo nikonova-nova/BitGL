@@ -20,7 +20,7 @@ constexpr auto to_colorref(Vec3<std::uint8_t> const &color) -> COLORREF;
 
 
 
-#include "Color.ipp"
+#include "impl/Color.ipp"
 
 
 

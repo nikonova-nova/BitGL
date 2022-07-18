@@ -20,7 +20,7 @@ constexpr auto to_1d_index(Vec2<int> const &position, int const width) -> std::s
 
 
 
-#include "Point.ipp"
+#include "impl/Point.ipp"
 
 
 
