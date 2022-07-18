@@ -37,6 +37,47 @@ namespace BitGL
 	{
 		m_colorbuffer[to_1d_index(position, get_size()[Vec::width])] = to_colorref(color);
 	}
+	auto DrawWindow::render_line(Point2D const &point_a, Point2D const &point_b, ColorRGB const &color) -> void
+	{
+		auto a_x = point_a[Vec::x];
+		auto a_y = point_a[Vec::y];
+
+		auto b_x = point_b[Vec::x];
+		auto b_y = point_b[Vec::y];
+
+
+
+		auto dx = std::abs(b_x - a_x);
+		auto sx = a_x < b_x ? 1 : -1;
+
+		auto dy = -std::abs(b_y - a_y);
+		auto sy = a_y < b_y ? 1 : -1;
+
+		auto error = dx + dy;
+
+
+
+		while (true)
+		{
+			render_point({ a_x, a_y }, color);
+
+			if (a_x == b_x && a_y == b_y) { break; }
+
+			if (error * 2 >= dy)
+			{
+				if (a_x == b_x) { break; }
+				error += dy;
+				a_x += sx;
+			}
+
+			if (error * 2 <= dx)
+			{
+				if (a_y == b_y) { break; }
+				error += dx;
+				a_y += sy;
+			}
+		}
+	}
 
 	auto DrawWindow::draw() -> void
 	{

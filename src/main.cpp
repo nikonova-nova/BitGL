@@ -31,6 +31,12 @@ auto main() -> int
 		std::uint8_t b = (std::cos(time_now + 4.18879) + 1) * 127;
 
 		window.clear_colorbuffer({ r, g, b });
+
+		window.render_line({ 400, 799 }, { 0  , 400 }, { b, r, g });
+		window.render_line({ 0  , 400 }, { 400, 0   }, { b, r, g });
+		window.render_line({ 400, 0   }, { 799, 400 }, { b, r, g });
+		window.render_line({ 799, 400 }, { 400, 799 }, { b, r, g });
+
 		window.draw();
 
 		BitGL::Window::poll_events();
