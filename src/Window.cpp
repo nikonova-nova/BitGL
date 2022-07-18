@@ -101,13 +101,25 @@ namespace BitGL
 	}
 	auto Window::create_window(Vec2<int> const &size, std::string const &title, bool const *is_open) noexcept -> HWND
 	{
+		DWORD window_style = WS_CAPTION | WS_OVERLAPPED | WS_SYSMENU;
+
+		RECT window_rect
+		{
+			.left   = 0,
+			.top    = 0,
+			.right  = size[Vec::width],
+			.bottom = size[Vec::height]
+		};
+
+		AdjustWindowRect(&window_rect, window_style, FALSE);
+
 		auto window = CreateWindowA(MAKEINTATOM(m_window_class_id),
 		                            title.c_str(),
-		                            WS_CAPTION | WS_OVERLAPPED | WS_SYSMENU,
+		                            window_style,
 		                            CW_USEDEFAULT,
 		                            CW_USEDEFAULT,
-		                            size[Vec::width],
-		                            size[Vec::height],
+		                            window_rect.right - window_rect.left,
+		                            window_rect.bottom - window_rect.top,
 		                            nullptr,
 		                            nullptr,
 		                            GetModuleHandleA(nullptr),
