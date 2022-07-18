@@ -34,7 +34,7 @@ namespace BitGL
 
 
 	public:
-		auto clear_colorbuffer(ColorRGB const &color)                       -> void;
+		auto clear_colorbuffer(ColorRGB const &color)                     -> void;
 		auto render_point(Point2D const &position, ColorRGB const &color) -> void;
 
 		auto draw() -> void;
