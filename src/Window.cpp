@@ -60,6 +60,14 @@ namespace BitGL
 
 
 
+	auto Window::get_time() noexcept -> float
+	{
+		auto current_time = std::chrono::steady_clock::now();
+		m_time = std::chrono::duration_cast<std::chrono::microseconds>(current_time - m_previous_time).count() / 1000000.0f;
+		m_previous_time = current_time;
+		return m_time;
+	}
+
 	auto Window::poll_events() noexcept -> void
 	{
 		MSG message;

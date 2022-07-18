@@ -10,6 +10,7 @@
 
 
 
+#include <chrono>
 #include <string>
 
 
@@ -45,6 +46,8 @@ namespace BitGL
 
 
 	public:
+		static auto get_time() noexcept -> float;
+
 		static auto poll_events() noexcept -> void;
 		static auto wait_events() noexcept -> void;
 
@@ -57,6 +60,9 @@ namespace BitGL
 	private:
 		static auto CALLBACK m_window_callback(HWND window, UINT message, WPARAM w_param, LPARAM l_param) noexcept -> LRESULT;
 		inline static ATOM m_window_class_id = 0;
+
+		inline static auto m_time = 0.0f;
+		inline static auto m_previous_time = std::chrono::steady_clock::now();
 
 		Vec2<int> m_size;
 
