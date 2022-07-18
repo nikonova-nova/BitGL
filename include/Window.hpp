@@ -34,15 +34,17 @@ public:
 	auto restore()  noexcept -> void;
 	auto minimize() noexcept -> void;
 
-	auto poll_events() noexcept -> void;
-	auto wait_events() noexcept -> void;
-
 
 public:
 	auto get_size() const noexcept -> Vec2<int>;
 
 	auto get_hwnd() const noexcept -> HWND;
 	auto get_hdc()  const noexcept -> HDC;
+
+
+public:
+	static auto poll_events() noexcept -> void;
+	static auto wait_events() noexcept -> void;
 
 
 private:

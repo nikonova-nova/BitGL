@@ -42,7 +42,7 @@ auto main() -> int
 		window.clear_colorbuffer({ r, g, b });
 		window.draw();
 
-		window.poll_events();
+		Window::poll_events();
 	}
 
 	return EXIT_SUCCESS;

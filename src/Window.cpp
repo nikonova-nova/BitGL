@@ -40,22 +40,6 @@ auto Window::minimize() noexcept -> void
 	ShowWindow(m_window, SW_SHOWMINIMIZED);
 }
 
-auto Window::poll_events() noexcept -> void
-{
-	MSG message;
-	while (PeekMessageA(&message, nullptr, 0, 0, PM_REMOVE))
-	{
-		TranslateMessage(&message);
-		DispatchMessageA(&message);
-	}
-}
-auto Window::wait_events() noexcept -> void
-{
-	WaitMessage();
-
-	poll_events();
-}
-
 
 
 auto Window::get_size() const noexcept -> Vec2<int>
@@ -70,6 +54,24 @@ auto Window::get_hwnd() const noexcept -> HWND
 auto Window::get_hdc()  const noexcept -> HDC
 {
 	return m_dc;
+}
+
+
+
+auto Window::poll_events() noexcept -> void
+{
+	MSG message;
+	while (PeekMessageA(&message, nullptr, 0, 0, PM_REMOVE))
+	{
+		TranslateMessage(&message);
+		DispatchMessageA(&message);
+	}
+}
+auto Window::wait_events() noexcept -> void
+{
+	WaitMessage();
+
+	poll_events();
 }
 
 
