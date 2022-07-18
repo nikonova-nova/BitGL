@@ -13,9 +13,12 @@
 
 
 
-constexpr auto to_colorref(Vec3<std::uint8_t> const &color) -> COLORREF
+namespace BitGL
 {
-	return RGB(color[Vec::b], color[Vec::g], color[Vec::r]);
+	constexpr auto to_colorref(Vec3<std::uint8_t> const &color) -> COLORREF
+	{
+		return RGB(color[Vec::b], color[Vec::g], color[Vec::r]);
+	}
 }
 
 

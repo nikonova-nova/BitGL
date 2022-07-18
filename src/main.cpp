@@ -16,7 +16,7 @@
 
 auto main() -> int
 {
-	DrawWindow window({ 800, 800 }, "BitGL");
+	BitGL::DrawWindow window({ 800, 800 }, "BitGL");
 	window.restore();
 
 
@@ -42,7 +42,7 @@ auto main() -> int
 		window.clear_colorbuffer({ r, g, b });
 		window.draw();
 
-		Window::poll_events();
+		BitGL::Window::poll_events();
 	}
 
 	return EXIT_SUCCESS;

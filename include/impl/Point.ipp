@@ -13,9 +13,12 @@
 
 
 
-constexpr auto to_1d_index(Vec2<int> const &position, int const width) -> std::size_t
+namespace BitGL
 {
-	return position[Vec::y] * width + position[Vec::x];
+	constexpr auto to_1d_index(Vec2<int> const &position, int const width) -> std::size_t
+	{
+		return position[Vec::y] * width + position[Vec::x];
+	}
 }
 
 

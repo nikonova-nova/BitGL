@@ -13,7 +13,10 @@
 
 
 
-constexpr auto to_1d_index(Vec2<int> const &position, int const width) -> std::size_t;
+namespace BitGL
+{
+	constexpr auto to_1d_index(Vec2<int> const &position, int const width) -> std::size_t;
+}
 
 
 
