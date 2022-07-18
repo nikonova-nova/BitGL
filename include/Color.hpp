@@ -15,7 +15,14 @@
 
 namespace BitGL
 {
-	constexpr auto to_colorref(Vec3<std::uint8_t> const &color) -> COLORREF;
+	using ColorRGB = Vec3<uint8_t>;
+
+
+
+
+
+
+	constexpr auto to_colorref(ColorRGB const &color) -> COLORREF;
 }
 
 

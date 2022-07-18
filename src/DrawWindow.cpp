@@ -29,11 +29,11 @@ namespace BitGL
 
 
 
-	auto DrawWindow::clear_colorbuffer(Vec3<std::uint8_t> const &color) -> void
+	auto DrawWindow::clear_colorbuffer(ColorRGB const &color) -> void
 	{
 		std::fill(m_colorbuffer.begin(), m_colorbuffer.end(), to_colorref(color));
 	}
-	auto DrawWindow::render_point(Vec2<int> const &position, Vec3<std::uint8_t> const &color) -> void
+	auto DrawWindow::render_point(Point2D const &position, ColorRGB const &color) -> void
 	{
 		m_colorbuffer[to_1d_index(position, get_size()[Vec::width])] = to_colorref(color);
 	}

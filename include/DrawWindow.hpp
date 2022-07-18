@@ -15,6 +15,8 @@
 
 
 
+#include "Color.hpp"
+#include "Point.hpp"
 #include "Window.hpp"
 
 
@@ -32,8 +34,8 @@ namespace BitGL
 
 
 	public:
-		auto clear_colorbuffer(Vec3<std::uint8_t> const &color)                       -> void;
-		auto render_point(Vec2<int> const &position, Vec3<std::uint8_t> const &color) -> void;
+		auto clear_colorbuffer(ColorRGB const &color)                       -> void;
+		auto render_point(Point2D const &position, ColorRGB const &color) -> void;
 
 		auto draw() -> void;
 
