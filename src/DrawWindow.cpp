@@ -45,15 +45,13 @@ namespace BitGL
 		auto b_x = point_b[Vec::x];
 		auto b_y = point_b[Vec::y];
 
+		auto d_x = std::abs(b_x - a_x);
+		auto s_x = a_x < b_x ? 1 : -1;
 
+		auto d_y = -std::abs(b_y - a_y);
+		auto s_y = a_y < b_y ? 1 : -1;
 
-		auto dx = std::abs(b_x - a_x);
-		auto sx = a_x < b_x ? 1 : -1;
-
-		auto dy = -std::abs(b_y - a_y);
-		auto sy = a_y < b_y ? 1 : -1;
-
-		auto error = dx + dy;
+		auto error = d_x + d_y;
 
 
 
@@ -63,18 +61,18 @@ namespace BitGL
 
 			if (a_x == b_x && a_y == b_y) { break; }
 
-			if (error * 2 >= dy)
+			if (error * 2 >= d_y)
 			{
 				if (a_x == b_x) { break; }
-				error += dy;
-				a_x += sx;
+				error += d_y;
+				a_x += s_x;
 			}
 
-			if (error * 2 <= dx)
+			if (error * 2 <= d_x)
 			{
 				if (a_y == b_y) { break; }
-				error += dx;
-				a_y += sy;
+				error += d_x;
+				a_y += s_y;
 			}
 		}
 	}
