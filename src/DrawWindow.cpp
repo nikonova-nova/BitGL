@@ -78,6 +78,12 @@ namespace BitGL
 			}
 		}
 	}
+	auto DrawWindow::render_triangle(Triangle2D const &triangle, ColorRGB const &color) -> void
+	{
+		render_line(triangle[Vec::x], triangle[Vec::y], color);
+		render_line(triangle[Vec::y], triangle[Vec::z], color);
+		render_line(triangle[Vec::z], triangle[Vec::x], color);
+	}
 
 	auto DrawWindow::draw() -> void
 	{
