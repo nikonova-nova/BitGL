@@ -165,7 +165,6 @@ namespace BitGL
 		while (true)
 		{
 			render_line({ a_x_0, a_y_0 }, { b_x_0, b_y_0 }, color);
-			//render_point({ b_x_0, b_y_0 }, color);
 
 			if ((a_x_0 == a_x_1 && a_y_0 == a_y_1) &&
 			    (b_x_0 == b_x_1 && b_y_0 == b_y_1)) { break; }
@@ -234,7 +233,6 @@ namespace BitGL
 		while (true)
 		{
 			render_line({ a_x_0, a_y_0 }, { b_x_0, b_y_0 }, color);
-			//render_point({ b_x_0, b_y_0 }, color);
 
 			if ((a_x_0 == a_x_1 && a_y_0 == a_y_1) &&
 			    (b_x_0 == b_x_1 && b_y_0 == b_y_1)) { break; }
