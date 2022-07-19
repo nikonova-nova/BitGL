@@ -170,7 +170,7 @@ namespace BitGL
 			if ((a_x_0 == a_x_1 && a_y_0 == a_y_1) &&
 			    (b_x_0 == b_x_1 && b_y_0 == b_y_1)) { break; }
 
-			if (a_error * 2 >= a_d_y)
+			while (a_error * 2 >= a_d_y)
 			{
 				if (a_x_0 == a_x_1) { break; }
 				a_error += a_d_y;
@@ -184,7 +184,7 @@ namespace BitGL
 				a_y_0 += a_s_y;
 			}
 
-			if (b_error * 2 >= b_d_y)
+			while (b_error * 2 >= b_d_y)
 			{
 				if (b_x_0 == b_x_1) { break; }
 				b_error += b_d_y;
@@ -239,7 +239,7 @@ namespace BitGL
 			if ((a_x_0 == a_x_1 && a_y_0 == a_y_1) &&
 			    (b_x_0 == b_x_1 && b_y_0 == b_y_1)) { break; }
 
-			if (a_error * 2 >= a_d_y)
+			while (a_error * 2 >= a_d_y)
 			{
 				if (a_x_0 == a_x_1) { break; }
 				a_error += a_d_y;
@@ -253,7 +253,7 @@ namespace BitGL
 				a_y_0 += a_s_y;
 			}
 
-			if (b_error * 2 >= b_d_y)
+			while (b_error * 2 >= b_d_y)
 			{
 				if (b_x_0 == b_x_1) { break; }
 				b_error += b_d_y;
