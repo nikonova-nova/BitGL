@@ -15,7 +15,7 @@
 
 namespace BitGL
 {
-	constexpr auto to_1d_index(Vec2<int> const &position, int const width) -> std::size_t
+	constexpr auto to_1d_index(Point2D const &position, int const width) -> std::size_t
 	{
 		return position[Vec::y] * width + position[Vec::x];
 	}
