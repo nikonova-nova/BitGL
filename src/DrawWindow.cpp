@@ -83,6 +83,32 @@ namespace BitGL
 		render_line(triangle[Vec::y], triangle[Vec::z], color);
 		render_line(triangle[Vec::z], triangle[Vec::x], color);
 	}
+	auto DrawWindow::render_triangle_filled(Triangle2D triangle, ColorRGB const &color) -> void
+	{
+		std::sort(triangle.begin(),
+		          triangle.end(),
+		          [](Point2D const &a, Point2D const &b) { return a[Vec::y] > b[Vec::y]; });
+
+		if (triangle[0][Vec::y] == triangle[1][Vec::y])
+		{
+			render_triangle_filled_flat_top(triangle, color);
+		}
+		else if (triangle[1][Vec::y] == triangle[2][Vec::y])
+		{
+			render_triangle_filled_flat_bottom(triangle, color);
+		}
+		else
+		{
+			Point2D divider_point =
+			{
+				static_cast<int>(triangle[0][Vec::x] + (static_cast<float>(triangle[1][Vec::y] - triangle[0][Vec::y]) / (triangle[2][Vec::y] - triangle[0][Vec::y])) * (triangle[2][Vec::x] - triangle[0][Vec::x])),
+				triangle[2][Vec::y]
+			};
+
+			render_triangle_filled_flat_top({ triangle[1], divider_point, triangle[2] }, color);
+			render_triangle_filled_flat_bottom({ triangle[0], triangle[1], divider_point }, color);
+		}
+	}
 
 	auto DrawWindow::draw() -> void
 	{
@@ -100,5 +126,146 @@ namespace BitGL
 		       0,
 		       0,
 		       SRCCOPY);
+	}
+
+
+
+	auto DrawWindow::render_triangle_filled_flat_top(Triangle2D const &triangle, ColorRGB const &color) -> void
+	{
+		auto a_x_0 = triangle[2][Vec::x];
+		auto a_y_0 = triangle[2][Vec::y];
+		auto b_x_0 = triangle[2][Vec::x];
+		auto b_y_0 = triangle[2][Vec::y];
+
+		auto a_x_1 = triangle[0][Vec::x];
+		auto a_y_1 = triangle[0][Vec::y];
+
+		auto b_x_1 = triangle[1][Vec::x];
+		auto b_y_1 = triangle[1][Vec::y];
+
+
+
+		auto a_d_x = std::abs(a_x_1 - a_x_0);
+		auto a_s_x = a_x_1 > a_x_0 ? 1 : -1;
+
+		auto b_d_x = std::abs(b_x_1 - b_x_0);
+		auto b_s_x = b_x_1 > b_x_0 ? 1 : -1;
+
+		auto a_d_y = -(a_y_1 - a_y_0);
+		auto a_s_y = 1;
+
+		auto b_d_y = -(b_y_1 - b_y_0);
+		auto b_s_y = 1;
+
+		auto a_error = a_d_x + a_d_y;
+		auto b_error = b_d_x + b_d_y;
+
+
+
+		while (true)
+		{
+			render_line({ a_x_0, a_y_0 }, { b_x_0, b_y_0 }, color);
+			//render_point({ b_x_0, b_y_0 }, color);
+
+			if ((a_x_0 == a_x_1 && a_y_0 == a_y_1) &&
+			    (b_x_0 == b_x_1 && b_y_0 == b_y_1)) { break; }
+
+			if (a_error * 2 >= a_d_y)
+			{
+				if (a_x_0 == a_x_1) { break; }
+				a_error += a_d_y;
+				a_x_0 += a_s_x;
+			}
+
+			if (a_error * 2 <= a_d_x)
+			{
+				if (a_y_0 == a_y_1) { break; }
+				a_error += a_d_x;
+				a_y_0 += a_s_y;
+			}
+
+			if (b_error * 2 >= b_d_y)
+			{
+				if (b_x_0 == b_x_1) { break; }
+				b_error += b_d_y;
+				b_x_0 += b_s_x;
+			}
+
+			if (b_error * 2 <= b_d_x)
+			{
+				if (b_y_0 == b_y_1) { break; }
+				b_error += b_d_x;
+				b_y_0 += b_s_y;
+			}
+		}
+	}
+	auto DrawWindow::render_triangle_filled_flat_bottom(Triangle2D const &triangle, ColorRGB const &color) -> void
+	{
+		auto a_x_0 = triangle[0][Vec::x];
+		auto a_y_0 = triangle[0][Vec::y];
+		auto b_x_0 = triangle[0][Vec::x];
+		auto b_y_0 = triangle[0][Vec::y];
+
+		auto a_x_1 = triangle[1][Vec::x];
+		auto a_y_1 = triangle[1][Vec::y];
+
+		auto b_x_1 = triangle[2][Vec::x];
+		auto b_y_1 = triangle[2][Vec::y];
+
+
+
+		auto a_d_x = std::abs(a_x_1 - a_x_0);
+		auto a_s_x = a_x_1 > a_x_0 ? 1 : -1;
+
+		auto b_d_x = std::abs(b_x_1 - b_x_0);
+		auto b_s_x = b_x_1 > b_x_0 ? 1 : -1;
+
+		auto a_d_y = a_y_1 - a_y_0;
+		auto a_s_y = -1;
+
+		auto b_d_y = b_y_1 - b_y_0;
+		auto b_s_y = -1;
+
+		auto a_error = a_d_x + a_d_y;
+		auto b_error = b_d_x + b_d_y;
+
+
+
+		while (true)
+		{
+			render_line({ a_x_0, a_y_0 }, { b_x_0, b_y_0 }, color);
+			//render_point({ b_x_0, b_y_0 }, color);
+
+			if ((a_x_0 == a_x_1 && a_y_0 == a_y_1) &&
+			    (b_x_0 == b_x_1 && b_y_0 == b_y_1)) { break; }
+
+			if (a_error * 2 >= a_d_y)
+			{
+				if (a_x_0 == a_x_1) { break; }
+				a_error += a_d_y;
+				a_x_0 += a_s_x;
+			}
+
+			if (a_error * 2 <= a_d_x)
+			{
+				if (a_y_0 == a_y_1) { break; }
+				a_error += a_d_x;
+				a_y_0 += a_s_y;
+			}
+
+			if (b_error * 2 >= b_d_y)
+			{
+				if (b_x_0 == b_x_1) { break; }
+				b_error += b_d_y;
+				b_x_0 += b_s_x;
+			}
+
+			if (b_error * 2 <= b_d_x)
+			{
+				if (b_y_0 == b_y_1) { break; }
+				b_error += b_d_x;
+				b_y_0 += b_s_y;
+			}
+		}
 	}
 }
