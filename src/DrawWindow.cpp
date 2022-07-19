@@ -35,7 +35,7 @@ namespace BitGL
 	}
 	auto DrawWindow::render_point(Point2D const &position, ColorRGB const &color) -> void
 	{
-		m_colorbuffer[to_1d_index(position, get_size()[Vec::width])] = to_colorref(color);
+		m_colorbuffer[to_1d_index(position, get_size())] = to_colorref(color);
 	}
 	auto DrawWindow::render_line(Point2D const &point_a, Point2D const &point_b, ColorRGB const &color) -> void
 	{

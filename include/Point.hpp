@@ -22,7 +22,7 @@ namespace BitGL
 
 
 
-	constexpr auto to_1d_index(Point2D const &position, int const width) -> std::size_t;
+	constexpr auto to_1d_index(Point2D const &position, Vec2<int> const &size) -> std::size_t;
 }
 
 
