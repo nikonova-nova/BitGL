@@ -102,7 +102,7 @@ namespace BitGL
 			Point2D divider_point =
 			{
 				static_cast<int>(triangle[0][Vec::x] + (static_cast<float>(triangle[1][Vec::y] - triangle[0][Vec::y]) / (triangle[2][Vec::y] - triangle[0][Vec::y])) * (triangle[2][Vec::x] - triangle[0][Vec::x])),
-				triangle[2][Vec::y]
+				triangle[1][Vec::y]
 			};
 
 			render_triangle_filled_flat_top({ triangle[1], divider_point, triangle[2] }, color);
