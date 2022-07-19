@@ -39,17 +39,17 @@ namespace BitGL
 	}
 	auto DrawWindow::render_line(Point2D const &point_a, Point2D const &point_b, ColorRGB const &color) -> void
 	{
-		auto a_x = point_a[Vec::x];
-		auto a_y = point_a[Vec::y];
+		auto x_0 = point_a[Vec::x];
+		auto y_0 = point_a[Vec::y];
 
-		auto b_x = point_b[Vec::x];
-		auto b_y = point_b[Vec::y];
+		auto x_1 = point_b[Vec::x];
+		auto y_1 = point_b[Vec::y];
 
-		auto d_x = std::abs(b_x - a_x);
-		auto s_x = a_x < b_x ? 1 : -1;
+		auto d_x = std::abs(x_1 - x_0);
+		auto s_x = x_1 > x_0 ? 1 : -1;
 
-		auto d_y = -std::abs(b_y - a_y);
-		auto s_y = a_y < b_y ? 1 : -1;
+		auto d_y = -std::abs(y_1 - y_0);
+		auto s_y = y_1 > y_0 ? 1 : -1;
 
 		auto error = d_x + d_y;
 
@@ -57,25 +57,26 @@ namespace BitGL
 
 		while (true)
 		{
-			render_point({ a_x, a_y }, color);
+			render_point({ x_0, y_0 }, color);
 
-			if (a_x == b_x && a_y == b_y) { break; }
+			if (x_0 == x_1 && y_0 == y_1) { break; }
 
 			if (error * 2 >= d_y)
 			{
-				if (a_x == b_x) { break; }
+				if (x_0 == x_1) { break; }
 				error += d_y;
-				a_x += s_x;
+				x_0 += s_x;
 			}
 
 			if (error * 2 <= d_x)
 			{
-				if (a_y == b_y) { break; }
+				if (y_0 == y_1) { break; }
 				error += d_x;
-				a_y += s_y;
+				y_0 += s_y;
 			}
 		}
 	}
+
 	auto DrawWindow::render_triangle(Triangle2D const &triangle, ColorRGB const &color) -> void
 	{
 		render_line(triangle[Vec::x], triangle[Vec::y], color);
