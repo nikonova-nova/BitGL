@@ -106,8 +106,8 @@ namespace BitGL
 		{
 			.left   = 0,
 			.top    = 0,
-			.right  = client_size[Vec::width],
-			.bottom = client_size[Vec::height]
+			.right  = client_size.width(),
+			.bottom = client_size.height()
 		};
 
 		AdjustWindowRect(&window_rect, WS_CAPTION | WS_OVERLAPPED | WS_SYSMENU, FALSE);
@@ -121,8 +121,8 @@ namespace BitGL
 		                            WS_CAPTION | WS_OVERLAPPED | WS_SYSMENU,
 		                            CW_USEDEFAULT,
 		                            CW_USEDEFAULT,
-		                            size[Vec::width],
-		                            size[Vec::height],
+		                            size.width(),
+		                            size.width(),
 		                            nullptr,
 		                            nullptr,
 		                            GetModuleHandleA(nullptr),

@@ -15,9 +15,9 @@ namespace BitGL
 {
 	DrawWindow::DrawWindow(Vec2<int> const &size, std::string const &title) :
 		Window               (size, title),
-		m_colorbuffer        (size[Vec::width] * size[Vec::height], RGB(0, 0, 0)),
+		m_colorbuffer        (size.width() * size.height(), RGB(0, 0, 0)),
 		m_colorbuffer_dc     { CreateCompatibleDC(get_hdc()) },
-		m_colorbuffer_bitmap { CreateBitmap(size[Vec::width], size[Vec::height], 1, sizeof(decltype(m_colorbuffer)::value_type) * 8, m_colorbuffer.data()) },
+		m_colorbuffer_bitmap { CreateBitmap(size.width(), size.height(), 1, sizeof(decltype(m_colorbuffer)::value_type) * 8, m_colorbuffer.data()) },
 		m_old_bitmap         { static_cast<decltype(m_old_bitmap)>(SelectObject(m_colorbuffer_dc, m_colorbuffer_bitmap)) }
 	{}
 	DrawWindow::~DrawWindow()
@@ -39,11 +39,11 @@ namespace BitGL
 	}
 	auto DrawWindow::add_line(Point2D const &point_a, Point2D const &point_b, ColorRGB const &color) -> void
 	{
-		auto x_0 = point_a[Vec::x];
-		auto y_0 = point_a[Vec::y];
+		auto x_0 = point_a.x();
+		auto y_0 = point_a.y();
 
-		auto x_1 = point_b[Vec::x];
-		auto y_1 = point_b[Vec::y];
+		auto x_1 = point_b.x();
+		auto y_1 = point_b.y();
 
 		auto d_x = std::abs(x_1 - x_0);
 		auto s_x = x_1 > x_0 ? 1 : -1;
@@ -79,21 +79,21 @@ namespace BitGL
 
 	auto DrawWindow::add_triangle(Triangle2D const &triangle, ColorRGB const &color) -> void
 	{
-		add_line(triangle[Vec::x], triangle[Vec::y], color);
-		add_line(triangle[Vec::y], triangle[Vec::z], color);
-		add_line(triangle[Vec::z], triangle[Vec::x], color);
+		add_line(triangle.x(), triangle.y(), color);
+		add_line(triangle.y(), triangle.z(), color);
+		add_line(triangle.z(), triangle.x(), color);
 	}
 	auto DrawWindow::add_triangle_filled(Triangle2D triangle, ColorRGB const &color) -> void
 	{
 		std::sort(triangle.begin(),
 		          triangle.end(),
-		          [](Point2D const &a, Point2D const &b) { return a[Vec::y] > b[Vec::y]; });
+		          [](Point2D const &a, Point2D const &b) { return a.y() > b.y(); });
 
-		if (triangle[0][Vec::y] == triangle[1][Vec::y])
+		if (triangle[0].y() == triangle[1].y())
 		{
 			add_triangle_filled_flat_top(triangle, color);
 		}
-		else if (triangle[1][Vec::y] == triangle[2][Vec::y])
+		else if (triangle[1].y() == triangle[2].y())
 		{
 			add_triangle_filled_flat_bottom(triangle, color);
 		}
@@ -101,8 +101,8 @@ namespace BitGL
 		{
 			Point2D divider_point =
 			{
-				static_cast<int>(triangle[0][Vec::x] + (static_cast<float>(triangle[1][Vec::y] - triangle[0][Vec::y]) / (triangle[2][Vec::y] - triangle[0][Vec::y])) * (triangle[2][Vec::x] - triangle[0][Vec::x])),
-				triangle[1][Vec::y]
+				static_cast<int>(triangle[0].x() + (static_cast<float>(triangle[1].y() - triangle[0].y()) / (triangle[2].y() - triangle[0].y())) * (triangle[2].x() - triangle[0].x())),
+				triangle[1].y()
 			};
 
 			add_triangle_filled_flat_top({ triangle[1], divider_point, triangle[2] }, color);
@@ -120,8 +120,8 @@ namespace BitGL
 		BitBlt(get_hdc(),
 		       0,
 		       0,
-		       window_size[Vec::width],
-		       window_size[Vec::height],
+		       window_size.width(),
+		       window_size.height(),
 		       m_colorbuffer_dc,
 		       0,
 		       0,
@@ -132,16 +132,16 @@ namespace BitGL
 
 	auto DrawWindow::add_triangle_filled_flat_top(Triangle2D const &triangle, ColorRGB const &color) -> void
 	{
-		auto a_x_0 = triangle[2][Vec::x];
-		auto a_y_0 = triangle[2][Vec::y];
-		auto b_x_0 = triangle[2][Vec::x];
-		auto b_y_0 = triangle[2][Vec::y];
+		auto a_x_0 = triangle[2].x();
+		auto a_y_0 = triangle[2].y();
+		auto b_x_0 = triangle[2].x();
+		auto b_y_0 = triangle[2].y();
 
-		auto a_x_1 = triangle[0][Vec::x];
-		auto a_y_1 = triangle[0][Vec::y];
+		auto a_x_1 = triangle[0].x();
+		auto a_y_1 = triangle[0].y();
 
-		auto b_x_1 = triangle[1][Vec::x];
-		auto b_y_1 = triangle[1][Vec::y];
+		auto b_x_1 = triangle[1].x();
+		auto b_y_1 = triangle[1].y();
 
 
 
@@ -200,16 +200,16 @@ namespace BitGL
 	}
 	auto DrawWindow::add_triangle_filled_flat_bottom(Triangle2D const &triangle, ColorRGB const &color) -> void
 	{
-		auto a_x_0 = triangle[0][Vec::x];
-		auto a_y_0 = triangle[0][Vec::y];
-		auto b_x_0 = triangle[0][Vec::x];
-		auto b_y_0 = triangle[0][Vec::y];
+		auto a_x_0 = triangle[0].x();
+		auto a_y_0 = triangle[0].y();
+		auto b_x_0 = triangle[0].x();
+		auto b_y_0 = triangle[0].y();
 
-		auto a_x_1 = triangle[1][Vec::x];
-		auto a_y_1 = triangle[1][Vec::y];
+		auto a_x_1 = triangle[1].x();
+		auto a_y_1 = triangle[1].y();
 
-		auto b_x_1 = triangle[2][Vec::x];
-		auto b_y_1 = triangle[2][Vec::y];
+		auto b_x_1 = triangle[2].x();
+		auto b_y_1 = triangle[2].y();
 
 
 

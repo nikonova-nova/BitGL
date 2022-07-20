@@ -21,41 +21,109 @@
 
 
 
+#define BITGL_VEC_DECL_ACCESS(f)       \
+constexpr auto f()       -> T       &; \
+constexpr auto f() const -> T const &;
+
+
+
+
+
+
 namespace BitGL
 {
-	namespace Vec
+	template<typename T, std::size_t N>
+	class Vec;
+
+
+
+	template<typename T>
+	class Vec<T, 2>
 	{
-		constexpr std::size_t x = 0;
-		constexpr std::size_t y = 1;
-		constexpr std::size_t z = 2;
-		constexpr std::size_t w = 3;
+	public:
+		BITGL_VEC_DECL_ACCESS(x)
+		BITGL_VEC_DECL_ACCESS(y)
 
-		constexpr std::size_t r = 0;
-		constexpr std::size_t g = 1;
-		constexpr std::size_t b = 2;
-		constexpr std::size_t a = 3;
+		BITGL_VEC_DECL_ACCESS(r)
+		BITGL_VEC_DECL_ACCESS(g)
 
-		constexpr std::size_t s = 0;
-		constexpr std::size_t t = 1;
-		constexpr std::size_t p = 2;
-		constexpr std::size_t q = 3;
+		BITGL_VEC_DECL_ACCESS(s)
+		BITGL_VEC_DECL_ACCESS(t)
 
-		constexpr std::size_t width  = 0;
-		constexpr std::size_t height = 1;
-		constexpr std::size_t depth  = 2;
-	}
+		BITGL_VEC_DECL_ACCESS(width)
+		BITGL_VEC_DECL_ACCESS(height)
+
+
+	public:
+		std::array<T, 2> m_internal_array;
+	};
+	template<typename T>
+	using Vec2 = Vec<T, 2>;
 
 
 
 	template<typename T>
-	using Vec2 = std::array<T, 2>;
+	class Vec<T, 3>
+	{
+	public:
+		BITGL_VEC_DECL_ACCESS(x)
+		BITGL_VEC_DECL_ACCESS(y)
+		BITGL_VEC_DECL_ACCESS(z)
+
+		BITGL_VEC_DECL_ACCESS(r)
+		BITGL_VEC_DECL_ACCESS(g)
+		BITGL_VEC_DECL_ACCESS(b)
+
+		BITGL_VEC_DECL_ACCESS(s)
+		BITGL_VEC_DECL_ACCESS(t)
+		BITGL_VEC_DECL_ACCESS(p)
+
+		BITGL_VEC_DECL_ACCESS(width)
+		BITGL_VEC_DECL_ACCESS(height)
+		BITGL_VEC_DECL_ACCESS(depth)
+
+
+	public:
+		std::array<T, 3> m_internal_array;
+	};
+	template<typename T>
+	using Vec3 = Vec<T, 3>;
+
+
 
 	template<typename T>
-	using Vec3 = std::array<T, 3>;
+	class Vec<T, 4>
+	{
+	public:
+		BITGL_VEC_DECL_ACCESS(x)
+		BITGL_VEC_DECL_ACCESS(y)
+		BITGL_VEC_DECL_ACCESS(z)
+		BITGL_VEC_DECL_ACCESS(w)
 
+		BITGL_VEC_DECL_ACCESS(r)
+		BITGL_VEC_DECL_ACCESS(g)
+		BITGL_VEC_DECL_ACCESS(b)
+		BITGL_VEC_DECL_ACCESS(a)
+
+		BITGL_VEC_DECL_ACCESS(s)
+		BITGL_VEC_DECL_ACCESS(t)
+		BITGL_VEC_DECL_ACCESS(p)
+		BITGL_VEC_DECL_ACCESS(q)
+
+
+	public:
+		std::array<T, 4> m_internal_array;
+	};
 	template<typename T>
-	using Vec4 = std::array<T, 4>;
+	using Vec4 = Vec<T, 4>;
 }
+
+
+
+
+
+
+#include "impl/Vec.ipp"
 
 
 

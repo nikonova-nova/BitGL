@@ -17,7 +17,7 @@ namespace BitGL
 {
 	constexpr auto to_colorref(ColorRGB const &color) -> COLORREF
 	{
-		return RGB(color[Vec::b], color[Vec::g], color[Vec::r]);
+		return RGB(color.b(), color.g(), color.r());
 	}
 }
 
