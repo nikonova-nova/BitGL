@@ -122,7 +122,7 @@ namespace BitGL
 		                            CW_USEDEFAULT,
 		                            CW_USEDEFAULT,
 		                            size.width(),
-		                            size.width(),
+		                            size.height(),
 		                            nullptr,
 		                            nullptr,
 		                            GetModuleHandleA(nullptr),
