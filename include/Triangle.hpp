@@ -6,6 +6,13 @@
 
 
 
+#include <array>
+
+
+
+
+
+
 #include "Point.hpp"
 
 
@@ -15,7 +22,7 @@
 
 namespace BitGL
 {
-	using Triangle2D = Vec3<Point2D>;
+	using Triangle2D = std::array<Point2D, 3>;
 }
 
 
