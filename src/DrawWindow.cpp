@@ -33,11 +33,11 @@ namespace BitGL
 	{
 		std::fill(m_colorbuffer.begin(), m_colorbuffer.end(), to_colorref(color));
 	}
-	auto DrawWindow::render_point(Point2D const &position, ColorRGB const &color) -> void
+	auto DrawWindow::add_point(Point2D const &position, ColorRGB const &color) -> void
 	{
 		m_colorbuffer[to_1d_index(position, get_size())] = to_colorref(color);
 	}
-	auto DrawWindow::render_line(Point2D const &point_a, Point2D const &point_b, ColorRGB const &color) -> void
+	auto DrawWindow::add_line(Point2D const &point_a, Point2D const &point_b, ColorRGB const &color) -> void
 	{
 		auto x_0 = point_a[Vec::x];
 		auto y_0 = point_a[Vec::y];
@@ -57,7 +57,7 @@ namespace BitGL
 
 		while (true)
 		{
-			render_point({ x_0, y_0 }, color);
+			add_point({ x_0, y_0 }, color);
 
 			if (x_0 == x_1 && y_0 == y_1) { break; }
 
@@ -77,13 +77,13 @@ namespace BitGL
 		}
 	}
 
-	auto DrawWindow::render_triangle(Triangle2D const &triangle, ColorRGB const &color) -> void
+	auto DrawWindow::add_triangle(Triangle2D const &triangle, ColorRGB const &color) -> void
 	{
-		render_line(triangle[Vec::x], triangle[Vec::y], color);
-		render_line(triangle[Vec::y], triangle[Vec::z], color);
-		render_line(triangle[Vec::z], triangle[Vec::x], color);
+		add_line(triangle[Vec::x], triangle[Vec::y], color);
+		add_line(triangle[Vec::y], triangle[Vec::z], color);
+		add_line(triangle[Vec::z], triangle[Vec::x], color);
 	}
-	auto DrawWindow::render_triangle_filled(Triangle2D triangle, ColorRGB const &color) -> void
+	auto DrawWindow::add_triangle_filled(Triangle2D triangle, ColorRGB const &color) -> void
 	{
 		std::sort(triangle.begin(),
 		          triangle.end(),
@@ -91,11 +91,11 @@ namespace BitGL
 
 		if (triangle[0][Vec::y] == triangle[1][Vec::y])
 		{
-			render_triangle_filled_flat_top(triangle, color);
+			add_triangle_filled_flat_top(triangle, color);
 		}
 		else if (triangle[1][Vec::y] == triangle[2][Vec::y])
 		{
-			render_triangle_filled_flat_bottom(triangle, color);
+			add_triangle_filled_flat_bottom(triangle, color);
 		}
 		else
 		{
@@ -105,8 +105,8 @@ namespace BitGL
 				triangle[1][Vec::y]
 			};
 
-			render_triangle_filled_flat_top({ triangle[1], divider_point, triangle[2] }, color);
-			render_triangle_filled_flat_bottom({ triangle[0], triangle[1], divider_point }, color);
+			add_triangle_filled_flat_top({ triangle[1], divider_point, triangle[2] }, color);
+			add_triangle_filled_flat_bottom({ triangle[0], triangle[1], divider_point }, color);
 		}
 	}
 
@@ -130,7 +130,7 @@ namespace BitGL
 
 
 
-	auto DrawWindow::render_triangle_filled_flat_top(Triangle2D const &triangle, ColorRGB const &color) -> void
+	auto DrawWindow::add_triangle_filled_flat_top(Triangle2D const &triangle, ColorRGB const &color) -> void
 	{
 		auto a_x_0 = triangle[2][Vec::x];
 		auto a_y_0 = triangle[2][Vec::y];
@@ -164,7 +164,7 @@ namespace BitGL
 
 		while (true)
 		{
-			render_line({ a_x_0, a_y_0 }, { b_x_0, b_y_0 }, color);
+			add_line({ a_x_0, a_y_0 }, { b_x_0, b_y_0 }, color);
 
 			if ((a_x_0 == a_x_1 && a_y_0 == a_y_1) &&
 			    (b_x_0 == b_x_1 && b_y_0 == b_y_1)) { break; }
@@ -198,7 +198,7 @@ namespace BitGL
 			}
 		}
 	}
-	auto DrawWindow::render_triangle_filled_flat_bottom(Triangle2D const &triangle, ColorRGB const &color) -> void
+	auto DrawWindow::add_triangle_filled_flat_bottom(Triangle2D const &triangle, ColorRGB const &color) -> void
 	{
 		auto a_x_0 = triangle[0][Vec::x];
 		auto a_y_0 = triangle[0][Vec::y];
@@ -232,7 +232,7 @@ namespace BitGL
 
 		while (true)
 		{
-			render_line({ a_x_0, a_y_0 }, { b_x_0, b_y_0 }, color);
+			add_line({ a_x_0, a_y_0 }, { b_x_0, b_y_0 }, color);
 
 			if ((a_x_0 == a_x_1 && a_y_0 == a_y_1) &&
 			    (b_x_0 == b_x_1 && b_y_0 == b_y_1)) { break; }

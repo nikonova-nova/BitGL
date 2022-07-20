@@ -36,18 +36,18 @@ namespace BitGL
 
 	public:
 		auto clear_colorbuffer(ColorRGB const &color)                                           -> void;
-		auto render_point(Point2D const &position, ColorRGB const &color)                       -> void;
-		auto render_line(Point2D const &point_a, Point2D const &point_b, ColorRGB const &color) -> void;
+		auto add_point(Point2D const &position, ColorRGB const &color)                       -> void;
+		auto add_line(Point2D const &point_a, Point2D const &point_b, ColorRGB const &color) -> void;
 
-		auto render_triangle(Triangle2D const &triangle, ColorRGB const &color) -> void;
-		auto render_triangle_filled(Triangle2D triangle, ColorRGB const &color) -> void;
+		auto add_triangle(Triangle2D const &triangle, ColorRGB const &color) -> void;
+		auto add_triangle_filled(Triangle2D triangle, ColorRGB const &color) -> void;
 
 		auto draw() -> void;
 
 
 	private:
-		auto render_triangle_filled_flat_top(Triangle2D const &triangle, ColorRGB const &color)    -> void;
-		auto render_triangle_filled_flat_bottom(Triangle2D const &triangle, ColorRGB const &color) -> void;
+		auto add_triangle_filled_flat_top(Triangle2D const &triangle, ColorRGB const &color)    -> void;
+		auto add_triangle_filled_flat_bottom(Triangle2D const &triangle, ColorRGB const &color) -> void;
 
 
 	private:
