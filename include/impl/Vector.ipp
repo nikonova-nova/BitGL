@@ -6,17 +6,17 @@
 
 
 
-#define BITGL_VECTOR_DEFN_ACCESS(n, f, i)                                                                  \
+#define BITGL_VECTOR_DEFN_ACCESS(f, i)                                                                     \
 template<typename T, std::size_t N>                                                                        \
 constexpr auto Vector<T, N>::f()       -> T       &                                                        \
 {                                                                                                          \
-	static_assert(N >= n, "This function will index out of bounds on this size of Vector");                \
+	static_assert(N >= i + 1, "This function will index out of bounds on this size of Vector");            \
 	return m_internal_array[i];                                                                            \
 }                                                                                                          \
 template<typename T, std::size_t N>                                                                        \
 constexpr auto Vector<T, N>::f() const -> T const &                                                        \
 {                                                                                                          \
-	static_assert(N >= n, "This function will index out of bounds on this size of Vector");                \
+	static_assert(N >= i + 1, "This function will index out of bounds on this size of Vector");            \
 	return m_internal_array[i];                                                                            \
 }
 
@@ -28,24 +28,24 @@ constexpr auto Vector<T, N>::f() const -> T const &                             
 namespace BitGL
 {
 	// VectorN
-	BITGL_VECTOR_DEFN_ACCESS(2, x, 0)
-	BITGL_VECTOR_DEFN_ACCESS(2, y, 1)
-	BITGL_VECTOR_DEFN_ACCESS(3, z, 2)
-	BITGL_VECTOR_DEFN_ACCESS(4, w, 3)
+	BITGL_VECTOR_DEFN_ACCESS(x, 0)
+	BITGL_VECTOR_DEFN_ACCESS(y, 1)
+	BITGL_VECTOR_DEFN_ACCESS(z, 2)
+	BITGL_VECTOR_DEFN_ACCESS(w, 3)
 
-	BITGL_VECTOR_DEFN_ACCESS(2, r, 0)
-	BITGL_VECTOR_DEFN_ACCESS(2, g, 1)
-	BITGL_VECTOR_DEFN_ACCESS(3, b, 2)
-	BITGL_VECTOR_DEFN_ACCESS(4, a, 3)
+	BITGL_VECTOR_DEFN_ACCESS(r, 0)
+	BITGL_VECTOR_DEFN_ACCESS(g, 1)
+	BITGL_VECTOR_DEFN_ACCESS(b, 2)
+	BITGL_VECTOR_DEFN_ACCESS(a, 3)
 
-	BITGL_VECTOR_DEFN_ACCESS(2, s, 0)
-	BITGL_VECTOR_DEFN_ACCESS(2, t, 1)
-	BITGL_VECTOR_DEFN_ACCESS(3, p, 2)
-	BITGL_VECTOR_DEFN_ACCESS(4, q, 3)
+	BITGL_VECTOR_DEFN_ACCESS(s, 0)
+	BITGL_VECTOR_DEFN_ACCESS(t, 1)
+	BITGL_VECTOR_DEFN_ACCESS(p, 2)
+	BITGL_VECTOR_DEFN_ACCESS(q, 3)
 
-	BITGL_VECTOR_DEFN_ACCESS(2, width, 0)
-	BITGL_VECTOR_DEFN_ACCESS(2, height, 1)
-	BITGL_VECTOR_DEFN_ACCESS(3, depth, 2)
+	BITGL_VECTOR_DEFN_ACCESS(width, 0)
+	BITGL_VECTOR_DEFN_ACCESS(height, 1)
+	BITGL_VECTOR_DEFN_ACCESS(depth, 2)
 }
 
 
