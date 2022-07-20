@@ -72,4 +72,11 @@ namespace BitGL
 
 
 
+#include "impl/Matrix.ipp"
+
+
+
+
+
+
 #endif
