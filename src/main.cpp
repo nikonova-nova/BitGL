@@ -9,6 +9,7 @@
 
 
 #include "Vector.hpp"
+#include "Matrix.hpp"
 #include "DrawWindow.hpp"
 
 
