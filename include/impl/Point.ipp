@@ -6,7 +6,7 @@
 
 
 
-#include "Vec.hpp"
+#include "Vector.hpp"
 
 
 
@@ -15,7 +15,7 @@
 
 namespace BitGL
 {
-	constexpr auto to_1d_index(Point2D const &position, Vec2<int> const &size) -> std::size_t
+	constexpr auto to_1d_index(Point2D const &position, Vector2<int> const &size) -> std::size_t
 	{
 		return (size.height() - position.y() - 1) * size.width() + position.x();
 	}

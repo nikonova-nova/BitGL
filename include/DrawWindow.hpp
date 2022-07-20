@@ -30,7 +30,7 @@ namespace BitGL
 	class DrawWindow : public Window
 	{
 	public:
-		DrawWindow(Vec2<int> const &size, std::string const &title);
+		DrawWindow(Vector2<int> const &size, std::string const &title);
 		~DrawWindow();
 
 

@@ -13,7 +13,7 @@
 
 namespace BitGL
 {
-	DrawWindow::DrawWindow(Vec2<int> const &size, std::string const &title) :
+	DrawWindow::DrawWindow(Vector2<int> const &size, std::string const &title) :
 		Window               (size, title),
 		m_colorbuffer        (size.width() * size.height(), RGB(0, 0, 0)),
 		m_colorbuffer_dc     { CreateCompatibleDC(get_hdc()) },

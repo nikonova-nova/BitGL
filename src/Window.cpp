@@ -7,7 +7,7 @@
 
 namespace BitGL
 {
-	Window::Window(Vec2<int> const &size, std::string const &title) noexcept :
+	Window::Window(Vector2<int> const &size, std::string const &title) noexcept :
 		m_size { size }
 	{
 		// Check if window class was already registered
@@ -44,7 +44,7 @@ namespace BitGL
 
 
 
-	auto Window::get_size() const noexcept -> Vec2<int>
+	auto Window::get_size() const noexcept -> Vector2<int>
 	{
 		return m_size;
 	}
@@ -100,7 +100,7 @@ namespace BitGL
 		return RegisterClassA(&window_class);
 	}
 
-	auto Window::client_to_window(Vec2<int> const &client_size) noexcept -> Vec2<int>
+	auto Window::client_to_window(Vector2<int> const &client_size) noexcept -> Vector2<int>
 	{
 		RECT window_rect
 		{
@@ -114,7 +114,7 @@ namespace BitGL
 
 		return { window_rect.right - window_rect.left, window_rect.bottom - window_rect.top };
 	}
-	auto Window::create_window(Vec2<int> const &size, std::string const &title, bool const *is_open) noexcept -> HWND
+	auto Window::create_window(Vector2<int> const &size, std::string const &title, bool const *is_open) noexcept -> HWND
 	{
 		auto window = CreateWindowA(MAKEINTATOM(m_window_class_id),
 		                            title.c_str(),

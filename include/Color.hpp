@@ -6,7 +6,7 @@
 
 
 
-#include "Vec.hpp"
+#include "Vector.hpp"
 
 
 
@@ -15,7 +15,7 @@
 
 namespace BitGL
 {
-	using ColorRGB = Vec3<uint8_t>;
+	using ColorRGB = Vector3<uint8_t>;
 
 
 
