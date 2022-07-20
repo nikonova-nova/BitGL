@@ -79,9 +79,9 @@ namespace BitGL
 
 	auto DrawWindow::add_triangle(Triangle2D const &triangle, ColorRGB const &color) -> void
 	{
-		add_line(triangle.x(), triangle.y(), color);
-		add_line(triangle.y(), triangle.z(), color);
-		add_line(triangle.z(), triangle.x(), color);
+		add_line(triangle[0], triangle[1], color);
+		add_line(triangle[1], triangle[2], color);
+		add_line(triangle[2], triangle[0], color);
 	}
 	auto DrawWindow::add_triangle_filled(Triangle2D triangle, ColorRGB const &color) -> void
 	{
