@@ -6,10 +6,10 @@
 
 
 
-#define BITGL_VEC_DEFN_ACCESS(n, f, i)                                     \
-template<typename T>                                                       \
-constexpr auto Vec<T, n>::f()       -> T       & { return m_internal_array[i]; }             \
-template<typename T>                                                       \
+#define BITGL_VEC_DEFN_ACCESS(n, f, i)                                           \
+template<typename T>                                                             \
+constexpr auto Vec<T, n>::f()       -> T       & { return m_internal_array[i]; } \
+template<typename T>                                                             \
 constexpr auto Vec<T, n>::f() const -> T const & { return m_internal_array[i]; }
 
 
