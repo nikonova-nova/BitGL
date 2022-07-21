@@ -21,7 +21,7 @@
 
 
 
-#define BITGL_VECTOR_DECL_ACCESS(f)       \
+#define BITGL_VECTOR_DECL_ACCESS(f)    \
 constexpr auto f()       -> T       &; \
 constexpr auto f() const -> T const &;
 

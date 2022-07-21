@@ -6,18 +6,18 @@
 
 
 
-#define BITGL_VECTOR_DEFN_ACCESS(f, i)                                                                     \
-template<typename T, std::size_t N>                                                                        \
-constexpr auto Vector<T, N>::f()       -> T       &                                                        \
-{                                                                                                          \
-	static_assert(N >= i + 1, "This function will index out of bounds on this size of Vector");            \
-	return m_internal_array[i];                                                                            \
-}                                                                                                          \
-template<typename T, std::size_t N>                                                                        \
-constexpr auto Vector<T, N>::f() const -> T const &                                                        \
-{                                                                                                          \
-	static_assert(N >= i + 1, "This function will index out of bounds on this size of Vector");            \
-	return m_internal_array[i];                                                                            \
+#define BITGL_VECTOR_DEFN_ACCESS(f, i)                                                          \
+template<typename T, std::size_t N>                                                             \
+constexpr auto Vector<T, N>::f()       -> T       &                                             \
+{                                                                                               \
+	static_assert(N >= i + 1, "This function will index out of bounds on this size of Vector"); \
+	return m_internal_array[i];                                                                 \
+}                                                                                               \
+template<typename T, std::size_t N>                                                             \
+constexpr auto Vector<T, N>::f() const -> T const &                                             \
+{                                                                                               \
+	static_assert(N >= i + 1, "This function will index out of bounds on this size of Vector"); \
+	return m_internal_array[i];                                                                 \
 }
 
 

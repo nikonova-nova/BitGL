@@ -23,6 +23,7 @@ auto main() -> int
 	window.restore();
 
 
+
 	auto time_before = BitGL::Window::get_time();
 
 	while (window.is_open())
