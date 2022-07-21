@@ -46,6 +46,13 @@ namespace BitGL
 	BITGL_VECTOR_DEFN_ACCESS(width, 0)
 	BITGL_VECTOR_DEFN_ACCESS(height, 1)
 	BITGL_VECTOR_DEFN_ACCESS(depth, 2)
+
+
+
+	template<typename T, std::size_t N>
+	constexpr auto Vector<T, N>::operator[](std::size_t const index)       -> T       & { return m_internal_array[index]; }
+	template<typename T, std::size_t N>
+	constexpr auto Vector<T, N>::operator[](std::size_t const index) const -> T const & { return m_internal_array[index]; }
 }
 
 

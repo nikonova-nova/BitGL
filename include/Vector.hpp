@@ -57,6 +57,11 @@ namespace BitGL
 
 
 	public:
+		constexpr auto operator[](std::size_t const index)       -> T       &;
+		constexpr auto operator[](std::size_t const index) const -> T const &;
+
+
+	public:
 		std::array<T, N> m_internal_array;
 	};
 	template<typename T>
