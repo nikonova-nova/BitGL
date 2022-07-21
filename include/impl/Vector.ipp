@@ -6,6 +6,13 @@
 
 
 
+#include <cmath>
+
+
+
+
+
+
 #define BITGL_VECTOR_DEFN_ACCESS(f, i)                                                          \
 template<typename T, std::size_t N>                                                             \
 constexpr auto Vector<T, N>::f()       -> T       &                                             \
@@ -28,6 +35,20 @@ constexpr auto Vector<T, N>::f() const -> T const &                             
 namespace BitGL
 {
 	// VectorN
+	template<typename T, std::size_t N>
+	constexpr auto Vector<T, N>::normalize() -> void
+	{
+		*this /= length();
+	}
+
+	template<typename T, std::size_t N>
+	constexpr auto Vector<T, N>::length() const -> T
+	{
+		return std::sqrt(dot(*this, *this));
+	}
+
+
+
 	BITGL_VECTOR_DEFN_ACCESS(x, 0)
 	BITGL_VECTOR_DEFN_ACCESS(y, 1)
 	BITGL_VECTOR_DEFN_ACCESS(z, 2)
@@ -117,6 +138,29 @@ namespace BitGL
 	constexpr auto Vector<T, N>::operator[](std::size_t const index)       -> T       & { return m_internal_array[index]; }
 	template<typename T, std::size_t N>
 	constexpr auto Vector<T, N>::operator[](std::size_t const index) const -> T const & { return m_internal_array[index]; }
+
+
+
+	template<typename T, std::size_t N>
+	constexpr auto dot(Vector<T, N> const &a, Vector<T, N> const &b) -> T
+	{
+		auto tmp { a * b };
+		T accum {};
+		for (auto const &x : tmp.m_internal_array)
+		{
+			accum += x;
+		}
+		return accum;
+	}
+	template<typename T>
+	constexpr auto cross(Vector3<T> const &a, Vector3<T> const &b) -> Vector3<T>
+	{
+		return {
+			a.y() * b.z() - a.z() * b.y(),
+			a.z() * b.x() - a.x() * b.z(),
+			a.x() * b.y() - a.y() * b.x()
+		};
+	}
 }
 
 

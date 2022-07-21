@@ -36,6 +36,12 @@ namespace BitGL
 	class Vector
 	{
 	public:
+		constexpr auto normalize() -> void;
+
+		constexpr auto length() const -> T;
+
+
+	public:
 		BITGL_VECTOR_DECL_ACCESS(x)
 		BITGL_VECTOR_DECL_ACCESS(y)
 		BITGL_VECTOR_DECL_ACCESS(z)
@@ -125,6 +131,16 @@ namespace BitGL
 	using Vector3 = Vector<T, 3>;
 	template<typename T>
 	using Vector4 = Vector<T, 4>;
+
+
+
+
+
+
+	template<typename T, std::size_t N>
+	constexpr auto dot(Vector<T, N> const &a, Vector<T, N> const &b) -> T;
+	template<typename T>
+	constexpr auto cross(Vector3<T> const &a, Vector3<T> const &b) -> Vector3<T>;
 }
 
 
