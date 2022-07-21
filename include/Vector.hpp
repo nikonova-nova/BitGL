@@ -126,11 +126,28 @@ namespace BitGL
 
 
 	template<typename T>
-	using Vector2 = Vector<T, 2>;
+	using Vector2   = Vector<T, 2>;
+	using BVector2  = Vector2<bool>;
+	using IVector2  = Vector2<int>;
+	using FVector2  = Vector2<float>;
+	using DVector2  = Vector2<double>;
+	using LDVector2 = Vector2<long double>;
+
 	template<typename T>
-	using Vector3 = Vector<T, 3>;
+	using Vector3   = Vector<T, 3>;
+	using BVector3  = Vector3<bool>;
+	using IVector3  = Vector3<int>;
+	using FVector3  = Vector3<float>;
+	using DVector3  = Vector3<double>;
+	using LDVector3 = Vector3<long double>;
+
 	template<typename T>
-	using Vector4 = Vector<T, 4>;
+	using Vector4   = Vector<T, 4>;
+	using BVector4  = Vector4<bool>;
+	using IVector4  = Vector4<int>;
+	using FVector4  = Vector4<float>;
+	using DVector4  = Vector4<double>;
+	using LDVector4 = Vector4<long double>;
 
 
 
