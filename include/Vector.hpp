@@ -57,6 +57,28 @@ namespace BitGL
 
 
 	public:
+		// Unary self-modifying
+		constexpr auto operator++()    -> Vector<T, N> &;
+		constexpr auto operator++(int) -> Vector<T, N>;
+		constexpr auto operator--()    -> Vector<T, N> &;
+		constexpr auto operator--(int) -> Vector<T, N>;
+
+
+
+		// Binary self-modifying
+		constexpr auto operator+=(T const scalar) -> Vector<T, N> &;
+		constexpr auto operator-=(T const scalar) -> Vector<T, N> &;
+		constexpr auto operator*=(T const scalar) -> Vector<T, N> &;
+		constexpr auto operator/=(T const scalar) -> Vector<T, N> &;
+
+		constexpr auto operator+=(Vector<T, N> const &rhs) -> Vector<T, N> &;
+		constexpr auto operator-=(Vector<T, N> const &rhs) -> Vector<T, N> &;
+		constexpr auto operator*=(Vector<T, N> const &rhs) -> Vector<T, N> &;
+		constexpr auto operator/=(Vector<T, N> const &rhs) -> Vector<T, N> &;
+
+
+
+		// Indexing
 		constexpr auto operator[](std::size_t const index)       -> T       &;
 		constexpr auto operator[](std::size_t const index) const -> T const &;
 
@@ -64,6 +86,39 @@ namespace BitGL
 	public:
 		std::array<T, N> m_internal_array;
 	};
+
+
+
+
+
+
+	// Unary non-self-modifying
+	template<typename T, std::size_t N> constexpr auto operator+(Vector<T, N> vector) -> Vector<T, N>;
+	template<typename T, std::size_t N> constexpr auto operator-(Vector<T, N> vector) -> Vector<T, N>;
+
+
+
+	// Binary non-self-modifying
+	template<typename T, std::size_t N> constexpr auto operator+(Vector<T, N> const vector, T const scalar) -> Vector<T, N>;
+	template<typename T, std::size_t N> constexpr auto operator-(Vector<T, N> const vector, T const scalar) -> Vector<T, N>;
+	template<typename T, std::size_t N> constexpr auto operator*(Vector<T, N> const vector, T const scalar) -> Vector<T, N>;
+	template<typename T, std::size_t N> constexpr auto operator/(Vector<T, N> const vector, T const scalar) -> Vector<T, N>;
+
+	template<typename T, std::size_t N> constexpr auto operator+(Vector<T, N> lhs, Vector<T, N> const &rhs) -> Vector<T, N>;
+	template<typename T, std::size_t N> constexpr auto operator-(Vector<T, N> lhs, Vector<T, N> const &rhs) -> Vector<T, N>;
+	template<typename T, std::size_t N> constexpr auto operator*(Vector<T, N> lhs, Vector<T, N> const &rhs) -> Vector<T, N>;
+	template<typename T, std::size_t N> constexpr auto operator/(Vector<T, N> lhs, Vector<T, N> const &rhs) -> Vector<T, N>;
+
+
+
+	// Comparison
+	template<typename T, std::size_t N> constexpr auto operator==(Vector<T, N> const &lhs, Vector<T, N> const &rhs) -> bool;
+
+
+
+
+
+
 	template<typename T>
 	using Vector2 = Vector<T, 2>;
 	template<typename T>

@@ -50,6 +50,70 @@ namespace BitGL
 
 
 	template<typename T, std::size_t N>
+	constexpr auto Vector<T, N>::operator++()    -> Vector<T, N> & { for (auto &x : m_internal_array) { ++x; } return *this; }
+	template<typename T, std::size_t N>
+	constexpr auto Vector<T, N>::operator++(int) -> Vector<T, N>   { auto tmp { *this }; operator++(); return tmp; }
+	template<typename T, std::size_t N>
+	constexpr auto Vector<T, N>::operator--()    -> Vector<T, N> & { for (auto &x : m_internal_array) { --x; } return *this; }
+	template<typename T, std::size_t N>
+	constexpr auto Vector<T, N>::operator--(int) -> Vector<T, N>   { auto tmp { *this }; operator--(); return tmp; }
+
+
+
+	template<typename T, std::size_t N>
+	constexpr auto operator+(Vector<T, N> vector) -> Vector<T, N> { return vector; }
+	template<typename T, std::size_t N>
+	constexpr auto operator-(Vector<T, N> vector) -> Vector<T, N> { for (auto &x : vector.m_internal_array) { x = -x; } return vector; }
+
+
+
+	template<typename T, std::size_t N>
+	constexpr auto Vector<T, N>::operator+=(T const scalar) -> Vector<T, N> & { for (auto &x: m_internal_array) { x += scalar; } return *this; }
+	template<typename T, std::size_t N>
+	constexpr auto Vector<T, N>::operator-=(T const scalar) -> Vector<T, N> & { for (auto &x: m_internal_array) { x -= scalar; } return *this; }
+	template<typename T, std::size_t N>
+	constexpr auto Vector<T, N>::operator*=(T const scalar) -> Vector<T, N> & { for (auto &x: m_internal_array) { x *= scalar; } return *this; }
+	template<typename T, std::size_t N>
+	constexpr auto Vector<T, N>::operator/=(T const scalar) -> Vector<T, N> & { for (auto &x: m_internal_array) { x /= scalar; } return *this; }
+
+	template<typename T, std::size_t N>
+	constexpr auto Vector<T, N>::operator+=(Vector<T, N> const &rhs) -> Vector<T, N> & { for (std::size_t i = 0; i < N; ++i) { m_internal_array[i] += rhs[i]; } return *this; }
+	template<typename T, std::size_t N>
+	constexpr auto Vector<T, N>::operator-=(Vector<T, N> const &rhs) -> Vector<T, N> & { for (std::size_t i = 0; i < N; ++i) { m_internal_array[i] -= rhs[i]; } return *this; }
+	template<typename T, std::size_t N>
+	constexpr auto Vector<T, N>::operator*=(Vector<T, N> const &rhs) -> Vector<T, N> & { for (std::size_t i = 0; i < N; ++i) { m_internal_array[i] *= rhs[i]; } return *this; }
+	template<typename T, std::size_t N>
+	constexpr auto Vector<T, N>::operator/=(Vector<T, N> const &rhs) -> Vector<T, N> & { for (std::size_t i = 0; i < N; ++i) { m_internal_array[i] /= rhs[i]; } return *this; }
+
+
+
+	template<typename T, std::size_t N>
+	constexpr auto operator+(Vector<T, N> const vector, T const scalar) -> Vector<T, N> { vector += scalar; return vector; }
+	template<typename T, std::size_t N>
+	constexpr auto operator-(Vector<T, N> const vector, T const scalar) -> Vector<T, N> { vector -= scalar; return vector; }
+	template<typename T, std::size_t N>
+	constexpr auto operator*(Vector<T, N> const vector, T const scalar) -> Vector<T, N> { vector *= scalar; return vector; }
+	template<typename T, std::size_t N>
+	constexpr auto operator/(Vector<T, N> const vector, T const scalar) -> Vector<T, N> { vector /= scalar; return vector; }
+
+	template<typename T, std::size_t N>
+	constexpr auto operator+(Vector<T, N> lhs, Vector<T, N> const &rhs) -> Vector<T, N> { lhs += rhs; return lhs; }
+	template<typename T, std::size_t N>
+	constexpr auto operator-(Vector<T, N> lhs, Vector<T, N> const &rhs) -> Vector<T, N> { lhs -= rhs; return lhs; }
+	template<typename T, std::size_t N>
+	constexpr auto operator*(Vector<T, N> lhs, Vector<T, N> const &rhs) -> Vector<T, N> { lhs *= rhs; return lhs; }
+	template<typename T, std::size_t N>
+	constexpr auto operator/(Vector<T, N> lhs, Vector<T, N> const &rhs) -> Vector<T, N> { lhs /= rhs; return lhs; }
+
+
+
+	template<typename T, std::size_t N>
+	constexpr auto operator==(Vector<T, N> const &lhs, Vector<T, N> const &rhs) -> bool
+	{ for (std::size_t i = 0; i < N; ++i) { if (lhs.m_internal_array[i] != rhs.m_internal_array[i]) { return false; } } return true; }
+
+
+
+	template<typename T, std::size_t N>
 	constexpr auto Vector<T, N>::operator[](std::size_t const index)       -> T       & { return m_internal_array[index]; }
 	template<typename T, std::size_t N>
 	constexpr auto Vector<T, N>::operator[](std::size_t const index) const -> T const & { return m_internal_array[index]; }
