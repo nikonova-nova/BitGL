@@ -109,6 +109,13 @@ namespace BitGL
 
 
 	template<typename T, std::size_t N>
+	constexpr auto Vector<T, N>::operator[](std::size_t const index)       -> T       & { return m_internal_array[index]; }
+	template<typename T, std::size_t N>
+	constexpr auto Vector<T, N>::operator[](std::size_t const index) const -> T const & { return m_internal_array[index]; }
+
+
+
+	template<typename T, std::size_t N>
 	constexpr auto operator+(Vector<T, N> const vector, T const scalar) -> Vector<T, N> { vector += scalar; return vector; }
 	template<typename T, std::size_t N>
 	constexpr auto operator-(Vector<T, N> const vector, T const scalar) -> Vector<T, N> { vector -= scalar; return vector; }
@@ -131,13 +138,6 @@ namespace BitGL
 	template<typename T, std::size_t N>
 	constexpr auto operator==(Vector<T, N> const &lhs, Vector<T, N> const &rhs) -> bool
 	{ for (std::size_t i = 0; i < N; ++i) { if (lhs.m_internal_array[i] != rhs.m_internal_array[i]) { return false; } } return true; }
-
-
-
-	template<typename T, std::size_t N>
-	constexpr auto Vector<T, N>::operator[](std::size_t const index)       -> T       & { return m_internal_array[index]; }
-	template<typename T, std::size_t N>
-	constexpr auto Vector<T, N>::operator[](std::size_t const index) const -> T const & { return m_internal_array[index]; }
 
 
 
