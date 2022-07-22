@@ -15,16 +15,16 @@
 
 namespace BitGL
 {
-	template<typename T, std::size_t Rn, std::size_t Cn>
+	template<typename T, std::size_t N>
 	class Matrix
 	{
 	public:
 		// Binary self-modifying
-		constexpr auto operator*=(T const scalar)               -> Matrix<T, Rn, Cn> &;
+		constexpr auto operator*=(T const scalar)               -> Matrix<T, N> &;
 
-		constexpr auto operator+=(Matrix<T, Rn, Cn> const &rhs) -> Matrix<T, Rn, Cn> &;
-		constexpr auto operator-=(Matrix<T, Rn, Cn> const &rhs) -> Matrix<T, Rn, Cn> &;
-		constexpr auto operator*=(Matrix<T, Rn, Cn> const &rhs) -> Matrix<T, Rn, Cn> &;
+		constexpr auto operator+=(Matrix<T, N> const &rhs) -> Matrix<T, N> &;
+		constexpr auto operator-=(Matrix<T, N> const &rhs) -> Matrix<T, N> &;
+		constexpr auto operator*=(Matrix<T, N> const &rhs) -> Matrix<T, N> &;
 
 
 
@@ -33,7 +33,7 @@ namespace BitGL
 
 
 	public:
-		std::array<T, Rn * Cn> m_internal_array;
+		std::array<T, N * N> m_internal_array;
 	};
 
 
@@ -42,11 +42,11 @@ namespace BitGL
 
 
 	// Binary non-self-modifying
-	template<typename T, std::size_t Rn, std::size_t Cn> constexpr auto operator*(Matrix<T, Rn, Cn> matrix, T const scalar)            -> Matrix<T, Rn, Cn>;
+	template<typename T, std::size_t N> constexpr auto operator*(Matrix<T, N> matrix, T const scalar)       -> Matrix<T, N>;
 
-	template<typename T, std::size_t Rn, std::size_t Cn> constexpr auto operator+(Matrix<T, Rn, Cn> lhs, Matrix<T, Rn, Cn> const &rhs) -> Matrix<T, Rn, Cn>;
-	template<typename T, std::size_t Rn, std::size_t Cn> constexpr auto operator-(Matrix<T, Rn, Cn> lhs, Matrix<T, Rn, Cn> const &rhs) -> Matrix<T, Rn, Cn>;
-	template<typename T, std::size_t Rn, std::size_t Cn> constexpr auto operator*(Matrix<T, Rn, Cn> lhs, Matrix<T, Rn, Cn> const &rhs) -> Matrix<T, Rn, Cn>;
+	template<typename T, std::size_t N> constexpr auto operator+(Matrix<T, N> lhs, Matrix<T, N> const &rhs) -> Matrix<T, N>;
+	template<typename T, std::size_t N> constexpr auto operator-(Matrix<T, N> lhs, Matrix<T, N> const &rhs) -> Matrix<T, N>;
+	template<typename T, std::size_t N> constexpr auto operator*(Matrix<T, N> lhs, Matrix<T, N> const &rhs) -> Matrix<T, N>;
 
 
 
@@ -54,11 +54,11 @@ namespace BitGL
 
 
 	template<typename T>
-	using Matrix2x2 = Matrix<T, 2, 2>;
+	using Matrix2 = Matrix<T, 2>;
 	template<typename T>
-	using Matrix3x3 = Matrix<T, 3, 3>;
+	using Matrix3 = Matrix<T, 3>;
 	template<typename T>
-	using Matrix4x4 = Matrix<T, 4, 4>;
+	using Matrix4 = Matrix<T, 4>;
 }
 
 
