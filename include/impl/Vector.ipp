@@ -106,6 +106,21 @@ namespace BitGL
 	template<typename T, std::size_t N>
 	constexpr auto Vector<T, N>::operator/=(Vector<T, N> const &rhs) -> Vector<T, N> & { for (std::size_t i = 0; i < N; ++i) { m_internal_array[i] /= rhs[i]; } return *this; }
 
+	template<typename T, std::size_t N>
+	constexpr auto Vector<T, N>::operator*=(Matrix<T, N> const &matrix) -> Vector<T, N> &
+	{
+		Vector<T, N> temp {};
+		for (std::size_t i = 0; i < N; ++i)
+		{
+			for (std::size_t j = 0; j < N; ++j)
+			{
+				temp[i] += matrix[i][j] * (*this)[j];
+			}
+		}
+		*this = temp;
+		return *this;
+	}
+
 
 
 	template<typename T, std::size_t N>
@@ -132,6 +147,9 @@ namespace BitGL
 	constexpr auto operator*(Vector<T, N> lhs, Vector<T, N> const &rhs) -> Vector<T, N> { lhs *= rhs; return lhs; }
 	template<typename T, std::size_t N>
 	constexpr auto operator/(Vector<T, N> lhs, Vector<T, N> const &rhs) -> Vector<T, N> { lhs /= rhs; return lhs; }
+
+	template<typename T, std::size_t N>
+	constexpr auto operator*(Vector<T, N> vector, Matrix<T, N> const &matrix) -> Vector<T, N> { vector *= matrix; return matrix; }
 
 
 
