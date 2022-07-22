@@ -18,10 +18,6 @@
 
 
 
-#include "Matrix.hpp"
-
-
-
 
 
 
@@ -36,6 +32,15 @@ constexpr auto f() const -> T const &;
 
 namespace BitGL
 {
+	// FWD
+	template<typename T, std::size_t N>
+	class Matrix;
+
+
+
+
+
+
 	template<typename T, std::size_t N>
 	class Vector
 	{

@@ -13,6 +13,13 @@
 
 
 
+#include "Matrix.hpp"
+
+
+
+
+
+
 #define BITGL_VECTOR_DEFN_ACCESS(f, i)                                                          \
 template<typename T, std::size_t N>                                                             \
 constexpr auto Vector<T, N>::f()       -> T       &                                             \
