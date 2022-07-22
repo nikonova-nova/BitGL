@@ -49,6 +49,16 @@ namespace BitGL
 	}
 
 	template<typename T, std::size_t N>
+	constexpr auto Vector<T, N>::scale(Vector<T, 4> const &factors) -> void
+	{ static_assert(N == 4, "This function is only available for Vector4s"); *this *= Matrix<T, N>::scalar(factors); }
+	template<typename T, std::size_t N>
+	auto Vector<T, N>::rotate(T const angle, Vector<T, 4> const &axes) -> void
+	{ static_assert(N == 4, "This function is only available for Vector4s"); *this *= Matrix<T, N>::rotation(angle, axes); }
+	template<typename T, std::size_t N>
+	constexpr auto Vector<T, N>::translate(Vector<T, 4> const &offsets) -> void
+	{ static_assert(N == 4, "This function is only available for Vector4s"); *this *= Matrix<T, N>::translation(offsets); }
+
+	template<typename T, std::size_t N>
 	constexpr auto Vector<T, N>::length() const -> T
 	{
 		return std::sqrt(dot(*this, *this));

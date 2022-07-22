@@ -15,9 +15,26 @@
 
 namespace BitGL
 {
+	// FWD
+	template<typename T, std::size_t N>
+	class Vector;
+
+
+
+
+
+
 	template<typename T, std::size_t N>
 	class Matrix
 	{
+	public:
+		static constexpr auto identity() -> Matrix<T, N>;
+
+		static constexpr auto scalar(Vector<T, 4> const &factors)               -> Matrix<T, 4>;
+		static           auto rotation(T const angle, Vector<T, 4> const &axes) -> Matrix<T, 4>;
+		static constexpr auto translation(Vector<T, 4> const &offsets)          -> Matrix<T, 4>;
+
+
 	public:
 		// Binary self-modifying
 		constexpr auto operator*=(T const scalar)               -> Matrix<T, N> &;
