@@ -19,6 +19,15 @@ namespace BitGL
 	class Matrix
 	{
 	public:
+		// Binary self-modifying
+		constexpr auto operator*=(T const scalar)               -> Matrix<T, Rn, Cn> &;
+
+		constexpr auto operator+=(Matrix<T, Rn, Cn> const &rhs) -> Matrix<T, Rn, Cn> &;
+		constexpr auto operator-=(Matrix<T, Rn, Cn> const &rhs) -> Matrix<T, Rn, Cn> &;
+		constexpr auto operator*=(Matrix<T, Rn, Cn> const &rhs) -> Matrix<T, Rn, Cn> &;
+
+
+
 		constexpr auto operator[](std::size_t n)       -> T       *;
 		constexpr auto operator[](std::size_t n) const -> T const *;
 
@@ -26,6 +35,24 @@ namespace BitGL
 	public:
 		std::array<T, Rn * Cn> m_internal_array;
 	};
+
+
+
+
+
+
+	// Binary non-self-modifying
+	template<typename T, std::size_t Rn, std::size_t Cn> constexpr auto operator*(Matrix<T, Rn, Cn> matrix, T const scalar)            -> Matrix<T, Rn, Cn>;
+
+	template<typename T, std::size_t Rn, std::size_t Cn> constexpr auto operator+(Matrix<T, Rn, Cn> lhs, Matrix<T, Rn, Cn> const &rhs) -> Matrix<T, Rn, Cn>;
+	template<typename T, std::size_t Rn, std::size_t Cn> constexpr auto operator-(Matrix<T, Rn, Cn> lhs, Matrix<T, Rn, Cn> const &rhs) -> Matrix<T, Rn, Cn>;
+	template<typename T, std::size_t Rn, std::size_t Cn> constexpr auto operator*(Matrix<T, Rn, Cn> lhs, Matrix<T, Rn, Cn> const &rhs) -> Matrix<T, Rn, Cn>;
+
+
+
+
+
+
 	template<typename T>
 	using Matrix2x2 = Matrix<T, 2, 2>;
 	template<typename T>
