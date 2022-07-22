@@ -116,13 +116,13 @@ namespace BitGL
 
 
 	template<typename T, std::size_t N>
-	constexpr auto operator+(Vector<T, N> const vector, T const scalar) -> Vector<T, N> { vector += scalar; return vector; }
+	constexpr auto operator+(Vector<T, N> vector, T const scalar) -> Vector<T, N> { vector += scalar; return vector; }
 	template<typename T, std::size_t N>
-	constexpr auto operator-(Vector<T, N> const vector, T const scalar) -> Vector<T, N> { vector -= scalar; return vector; }
+	constexpr auto operator-(Vector<T, N> vector, T const scalar) -> Vector<T, N> { vector -= scalar; return vector; }
 	template<typename T, std::size_t N>
-	constexpr auto operator*(Vector<T, N> const vector, T const scalar) -> Vector<T, N> { vector *= scalar; return vector; }
+	constexpr auto operator*(Vector<T, N> vector, T const scalar) -> Vector<T, N> { vector *= scalar; return vector; }
 	template<typename T, std::size_t N>
-	constexpr auto operator/(Vector<T, N> const vector, T const scalar) -> Vector<T, N> { vector /= scalar; return vector; }
+	constexpr auto operator/(Vector<T, N> vector, T const scalar) -> Vector<T, N> { vector /= scalar; return vector; }
 
 	template<typename T, std::size_t N>
 	constexpr auto operator+(Vector<T, N> lhs, Vector<T, N> const &rhs) -> Vector<T, N> { lhs += rhs; return lhs; }

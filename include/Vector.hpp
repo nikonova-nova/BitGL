@@ -105,10 +105,10 @@ namespace BitGL
 
 
 	// Binary non-self-modifying
-	template<typename T, std::size_t N> constexpr auto operator+(Vector<T, N> const vector, T const scalar) -> Vector<T, N>;
-	template<typename T, std::size_t N> constexpr auto operator-(Vector<T, N> const vector, T const scalar) -> Vector<T, N>;
-	template<typename T, std::size_t N> constexpr auto operator*(Vector<T, N> const vector, T const scalar) -> Vector<T, N>;
-	template<typename T, std::size_t N> constexpr auto operator/(Vector<T, N> const vector, T const scalar) -> Vector<T, N>;
+	template<typename T, std::size_t N> constexpr auto operator+(Vector<T, N> vector, T const scalar) -> Vector<T, N>;
+	template<typename T, std::size_t N> constexpr auto operator-(Vector<T, N> vector, T const scalar) -> Vector<T, N>;
+	template<typename T, std::size_t N> constexpr auto operator*(Vector<T, N> vector, T const scalar) -> Vector<T, N>;
+	template<typename T, std::size_t N> constexpr auto operator/(Vector<T, N> vector, T const scalar) -> Vector<T, N>;
 
 	template<typename T, std::size_t N> constexpr auto operator+(Vector<T, N> lhs, Vector<T, N> const &rhs) -> Vector<T, N>;
 	template<typename T, std::size_t N> constexpr auto operator-(Vector<T, N> lhs, Vector<T, N> const &rhs) -> Vector<T, N>;
