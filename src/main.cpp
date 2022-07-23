@@ -19,7 +19,7 @@
 
 auto main() -> int
 {
-	BitGL::DrawWindow window({ 800, 800 }, "BitGL");
+	BitGL::DrawWindow window({ 1280, 720 }, "BitGL");
 	window.restore();
 
 
@@ -27,28 +27,28 @@ auto main() -> int
 	std::array<BitGL::Vector3<BitGL::FVector3>, 12> cube
 	{{
 		// SOUTH
-		{ 0.0f, 0.0f, 0.0f,    0.0f, 1.0f, 0.0f,    1.0f, 1.0f, 0.0f },
-		{ 0.0f, 0.0f, 0.0f,    1.0f, 1.0f, 0.0f,    1.0f, 0.0f, 0.0f },
+		{ -1.0f, -1.0f, -1.0f,    -1.0f, 1.0f, -1.0f,    1.0f, 1.0f, -1.0f },
+		{ -1.0f, -1.0f, -1.0f,    1.0f, 1.0f, -1.0f,    1.0f, -1.0f, -1.0f },
 
 		// EAST
-		{ 1.0f, 0.0f, 0.0f,    1.0f, 1.0f, 0.0f,    1.0f, 1.0f, 1.0f },
-		{ 1.0f, 0.0f, 0.0f,    1.0f, 1.0f, 1.0f,    1.0f, 0.0f, 1.0f },
+		{ 1.0f, -1.0f, -1.0f,    1.0f, 1.0f, -1.0f,    1.0f, 1.0f, 1.0f },
+		{ 1.0f, -1.0f, -1.0f,    1.0f, 1.0f, 1.0f,    1.0f, -1.0f, 1.0f },
 
 		// NORTH
-		{ 1.0f, 0.0f, 1.0f,    1.0f, 1.0f, 1.0f,    0.0f, 1.0f, 1.0f },
-		{ 1.0f, 0.0f, 1.0f,    0.0f, 1.0f, 1.0f,    0.0f, 0.0f, 1.0f },
+		{ 1.0f, -1.0f, 1.0f,    1.0f, 1.0f, 1.0f,    -1.0f, 1.0f, 1.0f },
+		{ 1.0f, -1.0f, 1.0f,    -1.0f, 1.0f, 1.0f,    -1.0f, -1.0f, 1.0f },
 
 		// WEST
-		{ 0.0f, 0.0f, 1.0f,    0.0f, 1.0f, 1.0f,    0.0f, 1.0f, 0.0f },
-		{ 0.0f, 0.0f, 1.0f,    0.0f, 1.0f, 0.0f,    0.0f, 0.0f, 0.0f },
+		{ -1.0f, -1.0f, 1.0f,    -1.0f, 1.0f, 1.0f,    -1.0f, 1.0f, -1.0f },
+		{ -1.0f, -1.0f, 1.0f,    -1.0f, 1.0f, -1.0f,    -1.0f, -1.0f, -1.0f },
 
 		// TOP
-		{ 0.0f, 1.0f, 0.0f,    0.0f, 1.0f, 1.0f,    1.0f, 1.0f, 1.0f },
-		{ 0.0f, 1.0f, 0.0f,    1.0f, 1.0f, 1.0f,    1.0f, 1.0f, 0.0f },
+		{ -1.0f, 1.0f, -1.0f,    -1.0f, 1.0f, 1.0f,    1.0f, 1.0f, 1.0f },
+		{ -1.0f, 1.0f, -1.0f,    1.0f, 1.0f, 1.0f,    1.0f, 1.0f, -1.0f },
 
 		// BOTTOM
-		{ 1.0f, 0.0f, 1.0f,    0.0f, 0.0f, 1.0f,    0.0f, 0.0f, 0.0f },
-		{ 1.0f, 0.0f, 1.0f,    0.0f, 0.0f, 0.0f,    1.0f, 0.0f, 0.0f },
+		{ 1.0f, -1.0f, 1.0f,    -1.0f, -1.0f, 1.0f,    -1.0f, -1.0f, -1.0f },
+		{ 1.0f, -1.0f, 1.0f,    -1.0f, -1.0f, -1.0f,    1.0f, -1.0f, -1.0f },
 	}};
 
 
@@ -69,20 +69,18 @@ auto main() -> int
 		{
 			for (auto &point : triangle.m_internal_array)
 			{
-				point.scale({ 100, 100, 100 });
-				point.rotate(std::cos(time_now), { 0, 1, 0 });
-				point.rotate(std::sin(time_now), { 1, 0, 0 });
-				point.rotate(std::sin(time_now), { 0, 0, 1 });
-				point.translate({ 399, 399, 0 });
-				//auto perspective = BitGL::FMatrix3::projection(1.5708f, 16.0f / 9, 0.1f, 1000.0f);
-				//point *= perspective;
+				auto window_size = BitGL::convert<int, 2, float>(window.get_size());
+
+				point.translate({ 0.0f, 0.0f, 0.0f });
+				point.project(1.5708f, window_size.x() / window_size.y(), 0.1f, 1000.0f);
+				point.scale({ window_size.x() / 2, window_size.y() / 2, 1 });
 			}
 
 			BitGL::Triangle2D triangle2d
 			{{
-				{ static_cast<int>(triangle[0].x()), static_cast<int>(triangle[0].y()) },
-				{ static_cast<int>(triangle[1].x()), static_cast<int>(triangle[1].y()) },
-				{ static_cast<int>(triangle[2].x()), static_cast<int>(triangle[2].y()) }
+				BitGL::convert<float, 2, int>(BitGL::truncate<float, 3, 2>(triangle.x())),
+				BitGL::convert<float, 2, int>(BitGL::truncate<float, 3, 2>(triangle.y())),
+				BitGL::convert<float, 2, int>(BitGL::truncate<float, 3, 2>(triangle.z()))
 			}};
 
 			window.add_triangle(triangle2d, { 255, 255, 255 });
