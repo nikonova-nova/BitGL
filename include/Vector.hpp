@@ -51,6 +51,8 @@ namespace BitGL
 		auto rotate(T const angle, Vector<T, 3> const &axes)           -> void;
 		constexpr auto translate(Vector<T, 3> const &offsets)          -> void;
 
+		auto project(T const fov, T const aspect_ratio, T const zn, T const zf) -> void;
+
 		constexpr auto length() const -> T;
 
 

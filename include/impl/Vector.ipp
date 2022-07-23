@@ -59,6 +59,10 @@ namespace BitGL
 	{ static_assert(N == 3, "This function is only available for Vector3s"); *this *= Matrix<T, N>::translation(offsets); }
 
 	template<typename T, std::size_t N>
+	auto Vector<T, N>::project(T const fov, T const aspect_ratio, T const zn, T const zf) -> void
+	{ static_assert(N == 3, "This function is only available for Vector3s"); *this *= Matrix<T, N>::projection(fov, aspect_ratio, zn, zf); }
+
+	template<typename T, std::size_t N>
 	constexpr auto Vector<T, N>::length() const -> T
 	{
 		return std::sqrt(dot(*this, *this));
