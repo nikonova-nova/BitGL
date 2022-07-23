@@ -66,6 +66,19 @@ namespace BitGL
 		};
 	}
 
+	template<typename T, std::size_t N>
+	auto Matrix<T, N>::projection(T const fov, T const aspect_ratio, T const near, T const far) -> Matrix<T, 4>
+	{
+		T const tf = 1 / std::tan(fov / 2);
+		return Matrix<T, 4>
+		{
+			aspect_ratio * tf , 0  , 0                           , 0,
+			0                 , tf , 0                           , 0,
+			0                 , 0  , far / (far - near)          , 1,
+			0                 , 0  , (-far * near) / (far - near), 0
+		};
+	}
+
 
 
 	template<typename T, std::size_t N>
