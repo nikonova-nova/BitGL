@@ -30,9 +30,9 @@ namespace BitGL
 	public:
 		static constexpr auto identity() -> Matrix<T, N>;
 
-		static constexpr auto scalar(Vector<T, 4> const &factors)               -> Matrix<T, 4>;
-		static           auto rotation(T const angle, Vector<T, 4> const &axes) -> Matrix<T, 4>;
-		static constexpr auto translation(Vector<T, 4> const &offsets)          -> Matrix<T, 4>;
+		static constexpr auto scalar(Vector<T, 3> const &factors)               -> Matrix<T, 4>;
+		static           auto rotation(T const angle, Vector<T, 3> const &axes) -> Matrix<T, 4>;
+		static constexpr auto translation(Vector<T, 3> const &offsets)          -> Matrix<T, 4>;
 
 		static           auto projection(T const fov, T const aspect_ratio, T const near, T const far) -> Matrix<T, 4>;
 

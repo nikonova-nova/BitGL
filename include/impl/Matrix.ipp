@@ -27,7 +27,7 @@ namespace BitGL
 	}
 
 	template<typename T, std::size_t N>
-	constexpr auto Matrix<T, N>::scalar(Vector<T, 4> const &factors) -> Matrix<T, 4>
+	constexpr auto Matrix<T, N>::scalar(Vector<T, 3> const &factors) -> Matrix<T, 4>
 	{
 		return Matrix<T, 4>
 		{
@@ -38,7 +38,7 @@ namespace BitGL
 		};
 	}
 	template<typename T, std::size_t N>
-	auto Matrix<T, N>::rotation(T const angle, Vector<T, 4> const &axes) -> Matrix<T, 4>
+	auto Matrix<T, N>::rotation(T const angle, Vector<T, 3> const &axes) -> Matrix<T, 4>
 	{
 		T const s = std::sin(angle);
 		T const c = std::cos(angle);
@@ -55,7 +55,7 @@ namespace BitGL
 		};
 	}
 	template<typename T, std::size_t N>
-	constexpr auto Matrix<T, N>::translation(Vector<T, 4> const &offsets)          -> Matrix<T, 4>
+	constexpr auto Matrix<T, N>::translation(Vector<T, 3> const &offsets)          -> Matrix<T, 4>
 	{
 		return Matrix<T, 4>
 		{
@@ -67,15 +67,15 @@ namespace BitGL
 	}
 
 	template<typename T, std::size_t N>
-	auto Matrix<T, N>::projection(T const fov, T const aspect_ratio, T const near, T const far) -> Matrix<T, 4>
+	auto Matrix<T, N>::projection(T const fov, T const aspect_ratio, T const zn, T const zf) -> Matrix<T, 4>
 	{
 		T const tf = 1 / std::tan(fov / 2);
 		return Matrix<T, 4>
 		{
 			aspect_ratio * tf , 0  , 0                           , 0,
 			0                 , tf , 0                           , 0,
-			0                 , 0  , far / (far - near)          , 1,
-			0                 , 0  , (-far * near) / (far - near), 0
+			0                 , 0  , zf / (zf - zn)              , 1,
+			0                 , 0  , (-zf * zn) / (zf - zn)      , 0
 		};
 	}
 

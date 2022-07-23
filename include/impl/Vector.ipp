@@ -49,14 +49,14 @@ namespace BitGL
 	}
 
 	template<typename T, std::size_t N>
-	constexpr auto Vector<T, N>::scale(Vector<T, 4> const &factors) -> void
-	{ static_assert(N == 4, "This function is only available for Vector4s"); *this *= Matrix<T, N>::scalar(factors); }
+	constexpr auto Vector<T, N>::scale(Vector<T, 3> const &factors) -> void
+	{ static_assert(N == 3, "This function is only available for Vector3s"); *this *= Matrix<T, N>::scalar(factors); }
 	template<typename T, std::size_t N>
-	auto Vector<T, N>::rotate(T const angle, Vector<T, 4> const &axes) -> void
-	{ static_assert(N == 4, "This function is only available for Vector4s"); *this *= Matrix<T, N>::rotation(angle, axes); }
+	auto Vector<T, N>::rotate(T const angle, Vector<T, 3> const &axes) -> void
+	{ static_assert(N == 3, "This function is only available for Vector3s"); *this *= Matrix<T, N>::rotation(angle, axes); }
 	template<typename T, std::size_t N>
-	constexpr auto Vector<T, N>::translate(Vector<T, 4> const &offsets) -> void
-	{ static_assert(N == 4, "This function is only available for Vector4s"); *this *= Matrix<T, N>::translation(offsets); }
+	constexpr auto Vector<T, N>::translate(Vector<T, 3> const &offsets) -> void
+	{ static_assert(N == 3, "This function is only available for Vector3s"); *this *= Matrix<T, N>::translation(offsets); }
 
 	template<typename T, std::size_t N>
 	constexpr auto Vector<T, N>::length() const -> T

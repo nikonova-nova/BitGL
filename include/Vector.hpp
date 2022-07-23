@@ -47,9 +47,9 @@ namespace BitGL
 	public:
 		constexpr auto normalize() -> void;
 
-		constexpr auto scale(Vector<T, 4> const &factors)              -> void;
-		auto rotate(T const angle, Vector<T, 4> const &axes)           -> void;
-		constexpr auto translate(Vector<T, 4> const &offsets)          -> void;
+		constexpr auto scale(Vector<T, 3> const &factors)              -> void;
+		auto rotate(T const angle, Vector<T, 3> const &axes)           -> void;
+		constexpr auto translate(Vector<T, 3> const &offsets)          -> void;
 
 		constexpr auto length() const -> T;
 
