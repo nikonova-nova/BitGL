@@ -76,17 +76,6 @@ namespace BitGL
 
 
 	public:
-		template<typename Tb>
-		static constexpr auto convert(Vector<T, N> const &from) -> Vector<Tb, N>;
-
-		template<std::size_t Nb>
-		static constexpr auto truncate(Vector<T, N> const &from) -> Vector<T, Nb>;
-
-		template<std::size_t Nb>
-		static constexpr auto extend(Vector<T, N> const &from, T const fill) -> Vector<T, Nb>;
-
-
-	public:
 		// Unary self-modifying
 		constexpr auto operator++()    -> Vector<T, N> &;
 		constexpr auto operator++(int) -> Vector<T, N>;
@@ -123,6 +112,17 @@ namespace BitGL
 
 
 
+
+
+
+	template<typename T, std::size_t N, typename Tb>
+	constexpr auto convert(Vector<T, N> const &from) -> Vector<Tb, N>;
+
+	template<typename T, std::size_t N, std::size_t Nb>
+    constexpr auto truncate(Vector<T, N> const &from) -> Vector<T, Nb>;
+
+	template<typename T, std::size_t N, std::size_t Nb>
+	constexpr auto extend(Vector<T, N> const &from, T const fill) -> Vector<T, Nb>;
 
 
 
