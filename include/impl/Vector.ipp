@@ -223,6 +223,14 @@ namespace BitGL
 	template<typename T, std::size_t N>
 	constexpr auto operator*(Vector<T, N> vector, Matrix<T, N> const &matrix) -> Vector<T, N> { vector *= matrix; return matrix; }
 
+	template<typename T, std::size_t N, std::size_t Nb>
+	constexpr auto operator*(Vector<T, N> vector, Matrix<T, Nb> const &matrix) -> Vector<T, N>
+	{
+		static_assert(Nb > N, "This function is only for when the passed Matrix is larger than the this Vector");
+		vector *= matrix;
+		return vector;
+	}
+
 
 
 	template<typename T, std::size_t N>

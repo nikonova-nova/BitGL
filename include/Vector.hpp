@@ -146,6 +146,7 @@ namespace BitGL
 	template<typename T, std::size_t N> constexpr auto operator/(Vector<T, N> lhs, Vector<T, N> const &rhs) -> Vector<T, N>;
 
 	template<typename T, std::size_t N> constexpr auto operator*(Vector<T, N> vector, Matrix<T, N> const &matrix) -> Vector<T, N>;
+	template<typename T, std::size_t N, std::size_t Nb> constexpr auto operator*(Vector<T, N> vector, Matrix<T, Nb> const &matrix) -> Vector<T, N>;
 
 
 
