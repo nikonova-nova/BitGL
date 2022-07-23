@@ -35,8 +35,14 @@ namespace BitGL
 	}
 	auto DrawWindow::add_point(Point2D const &position, ColorRGB const &color) -> void
 	{
-		auto position_center_origin = get_size() / 2;
+		auto window_size = get_size();
+		auto position_center_origin = (window_size / 2) - 1;
 		position_center_origin += position;
+		if ((position_center_origin.x() < 0 || position_center_origin.x() > window_size.x()) ||
+		    (position_center_origin.y() < 0 || position_center_origin.y() > window_size.y()))
+		{
+			return;
+		}
 		m_colorbuffer[to_1d_index(position_center_origin - 1, get_size())] = to_colorref(color);
 	}
 	auto DrawWindow::add_line(Point2D const &point_a, Point2D const &point_b, ColorRGB const &color) -> void
