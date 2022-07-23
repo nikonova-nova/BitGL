@@ -88,6 +88,48 @@ namespace BitGL
 
 
 	template<typename T, std::size_t N>
+	template<typename Tb>
+	constexpr auto Vector<T, N>::convert(Vector<T, N> const &from) -> Vector<Tb, N>
+	{
+		Vector<Tb, N> result;
+		for (std::size_t i = 0; i < N; ++i)
+		{
+			result[i] = static_cast<Tb>(from[i]);
+		}
+		return result;
+	}
+
+	template<typename T, std::size_t N>
+	template<std::size_t Nb>
+	constexpr auto Vector<T, N>::truncate(Vector<T, N> const &from) -> Vector<T, Nb>
+	{
+		static_assert(Nb < N, "This function is only valid if the passed Vector has a larger element count than the resulting Vector");
+		Vector<T, Nb> result;
+		for (std::size_t i = 0; i < Nb; ++i)
+		{
+			result[i] = from[i];
+		}
+		return result;
+	}
+
+	template<typename T, std::size_t N>
+	template<std::size_t Nb>
+	constexpr auto Vector<T, N>::extend(Vector<T, N> const &from, T const fill) -> Vector<T, Nb>
+	{
+		static_assert(Nb > N, "This function is only valid if the passed Vector has a smaller element count than the resulting Vector");
+		Vector<T, Nb> result;
+		for (std::size_t i = 0; i < N; ++i)
+		{
+			result[i] = from[i];
+		}
+		for (std::size_t i = N; i < Nb; ++i)
+		{
+			result[i] = fill;
+		}
+		return result;
+	}
+
+	template<typename T, std::size_t N>
 	constexpr auto Vector<T, N>::operator++()    -> Vector<T, N> & { for (auto &x : m_internal_array) { ++x; } return *this; }
 	template<typename T, std::size_t N>
 	constexpr auto Vector<T, N>::operator++(int) -> Vector<T, N>   { auto tmp { *this }; operator++(); return tmp; }
