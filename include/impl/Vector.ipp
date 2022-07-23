@@ -179,6 +179,16 @@ namespace BitGL
 		*this = temp;
 		return *this;
 	}
+	template<typename T, std::size_t N>
+	template<std::size_t Nb>
+	constexpr auto Vector<T, N>::operator*=(Matrix<T, Nb> const &matrix) -> Vector<T, N> &
+	{
+		static_assert(Nb > N, "This function is only for when the passed Matrix is larger than the this Vector");
+		auto temp = extend<Nb>(*this, 1);
+		temp *= matrix;
+		*this = truncate<N>(temp);
+		return *this;
+	}
 
 
 
