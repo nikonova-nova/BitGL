@@ -24,6 +24,35 @@ auto main() -> int
 
 
 
+	std::array<BitGL::Vector3<BitGL::FVector3>, 12> cube
+	{{
+		// SOUTH
+		{ 0.0f, 0.0f, 0.0f,    0.0f, 1.0f, 0.0f,    1.0f, 1.0f, 0.0f },
+		{ 0.0f, 0.0f, 0.0f,    1.0f, 1.0f, 0.0f,    1.0f, 0.0f, 0.0f },
+
+		// EAST
+		{ 1.0f, 0.0f, 0.0f,    1.0f, 1.0f, 0.0f,    1.0f, 1.0f, 1.0f },
+		{ 1.0f, 0.0f, 0.0f,    1.0f, 1.0f, 1.0f,    1.0f, 0.0f, 1.0f },
+
+		// NORTH
+		{ 1.0f, 0.0f, 1.0f,    1.0f, 1.0f, 1.0f,    0.0f, 1.0f, 1.0f },
+		{ 1.0f, 0.0f, 1.0f,    0.0f, 1.0f, 1.0f,    0.0f, 0.0f, 1.0f },
+
+		// WEST
+		{ 0.0f, 0.0f, 1.0f,    0.0f, 1.0f, 1.0f,    0.0f, 1.0f, 0.0f },
+		{ 0.0f, 0.0f, 1.0f,    0.0f, 1.0f, 0.0f,    0.0f, 0.0f, 0.0f },
+
+		// TOP
+		{ 0.0f, 1.0f, 0.0f,    0.0f, 1.0f, 1.0f,    1.0f, 1.0f, 1.0f },
+		{ 0.0f, 1.0f, 0.0f,    1.0f, 1.0f, 1.0f,    1.0f, 1.0f, 0.0f },
+
+		// BOTTOM
+		{ 1.0f, 0.0f, 1.0f,    0.0f, 0.0f, 1.0f,    0.0f, 0.0f, 0.0f },
+		{ 1.0f, 0.0f, 1.0f,    0.0f, 0.0f, 0.0f,    1.0f, 0.0f, 0.0f },
+	}};
+
+
+
 	auto time_before = BitGL::Window::get_time();
 
 	while (window.is_open())
@@ -36,7 +65,28 @@ auto main() -> int
 
 		window.clear_colorbuffer({ 0, 0, 0 });
 
-		window.add_triangle_filled({{ { 0, 799 }, { 399, 0 }, { 799, 799 } }}, { 0, 255, 255 });
+		for (auto triangle : cube)
+		{
+			for (auto &point : triangle.m_internal_array)
+			{
+				point.scale({ 100, 100, 100 });
+				point.rotate(std::cos(time_now), { 0, 1, 0 });
+				point.rotate(std::sin(time_now), { 1, 0, 0 });
+				point.rotate(std::sin(time_now), { 0, 0, 1 });
+				point.translate({ 399, 399, 0 });
+				//auto perspective = BitGL::FMatrix3::projection(1.5708f, 16.0f / 9, 0.1f, 1000.0f);
+				//point *= perspective;
+			}
+
+			BitGL::Triangle2D triangle2d
+			{{
+				{ static_cast<int>(triangle[0].x()), static_cast<int>(triangle[0].y()) },
+				{ static_cast<int>(triangle[1].x()), static_cast<int>(triangle[1].y()) },
+				{ static_cast<int>(triangle[2].x()), static_cast<int>(triangle[2].y()) }
+			}};
+
+			window.add_triangle(triangle2d, { 255, 255, 255 });
+		}
 
 		window.draw();
 
